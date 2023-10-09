@@ -8,5 +8,10 @@ function getUnfinishedTodoList(todoArray){
     return completedArray;
 }
 
+function addTodoObject(todoObject,todoArray){
+    todoArray.push(todoObject)
+    return todoArray;
+}
 
-export {getCompletedTodoList,getUnfinishedTodoList};
+
+export {getCompletedTodoList,getUnfinishedTodoList,addTodoObject};
