@@ -13,5 +13,11 @@ function addTodoObject(todoObject,todoArray){
     return todoArray;
 }
 
+function deleteTodoObject(todoArray,objectPosition){
+    // let updatedArray = todoArray.splice(objectPosition,1);
+    // return updatedArray;
+    return todoArray.splice(objectPosition,1);
+}
 
-export {getCompletedTodoList,getUnfinishedTodoList,addTodoObject};
+
+export {getCompletedTodoList,getUnfinishedTodoList,addTodoObject,deleteTodoObject};
