@@ -3,6 +3,11 @@ function getCompletedTodoList(todoArray){
     return completedArray;
 }
 
+function sortTodoListPriority(todoArray){
+    const sortedArray = todoArray.sort((todoA, todoB) => todoA.priority - todoB.priority);
+    return sortedArray;
+};
+
 function getUnfinishedTodoList(todoArray){
     const completedArray = todoArray.filter(todoObject => !(todoObject.status));
     return completedArray;
