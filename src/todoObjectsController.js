@@ -14,8 +14,6 @@ function addTodoObject(todoObject,todoArray){
 }
 
 function deleteTodoObject(todoArray,objectPosition){
-    // let updatedArray = todoArray.splice(objectPosition,1);
-    // return updatedArray;
     return todoArray.splice(objectPosition,1);
 }
 
