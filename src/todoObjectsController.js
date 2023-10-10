@@ -9,7 +9,7 @@ function sortTodoListPriority(todoArray){
 };
 
 function getUnfinishedTodoList(todoArray){
-    const completedArray = todoArray.filter(todoObject => !(todoObject.status));
+    let completedArray = todoArray.filter(todoObject => !(todoObject.status));
     completedArray = sortTodoListPriority(completedArray);
     return completedArray;
 }
@@ -24,9 +24,29 @@ function deleteTodoObject(todoArray,objectPosition){
 }
 
 function moveUpTodoObject(todoArray,objectPosition,todoObject){
-    let newArray = todoArray.splice((objectPosition-1),0,todoObject);
-    newArray = newArray.splice((objectPosition+1),1);
-    return sortTodoListPriority(newArray);
+    todoArray.splice((objectPosition-1),0,todoObject);
+    todoArray.splice(checkDeleteObjectPosition(todoArray,objectPosition,true),1);
+    return sortTodoListPriority(todoArray);
 }
 
-export {getCompletedTodoList,getUnfinishedTodoList,addTodoObject,deleteTodoObject,moveUpTodoObject};
+function moveDownTodoObject(todoArray,objectPosition,todoObject){
+    todoArray.splice((objectPosition+2),0,todoObject);
+    todoArray.splice((checkDeleteObjectPosition(todoArray,objectPosition,false)),1);
+    return sortTodoListPriority(todoArray);
+}
+
+function checkDeleteObjectPosition(todoArray,objectPosition,operation){
+    if(objectPosition === 0){
+        return 0;
+    }else if(objectPosition === (todoArray.length-1)){
+        return objectPosition
+    }else{
+        if (operation){
+            return objectPosition + 1;
+        }else{
+            return objectPosition -1;
+        }
+    }
+}
+
+export {getCompletedTodoList,getUnfinishedTodoList,addTodoObject,deleteTodoObject,moveUpTodoObject,moveDownTodoObject};
