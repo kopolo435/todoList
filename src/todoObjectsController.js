@@ -1,5 +1,6 @@
 function getCompletedTodoList(todoArray){
-    const completedArray = todoArray.filter(todoObject => todoObject.status);
+    let completedArray = todoArray.filter(todoObject => todoObject.status);
+    completedArray = sortTodoListPriority(completedArray);
     return completedArray;
 }
 
@@ -22,5 +23,10 @@ function deleteTodoObject(todoArray,objectPosition){
     return todoArray.splice(objectPosition,1);
 }
 
+function moveUpTodoObject(todoArray,objectPosition,todoObject){
+    let newArray = todoArray.splice((objectPosition-1),0,todoObject);
+    newArray = newArray.splice((objectPosition+1),1);
+    return sortTodoListPriority(newArray);
+}
 
-export {getCompletedTodoList,getUnfinishedTodoList,addTodoObject,deleteTodoObject};
+export {getCompletedTodoList,getUnfinishedTodoList,addTodoObject,deleteTodoObject,moveUpTodoObject};
