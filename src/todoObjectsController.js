@@ -1,6 +1,5 @@
 function getCompletedTodoList(todoArray){
     let completedArray = todoArray.filter(todoObject => todoObject.status);
-    completedArray = sortTodoListPriority(completedArray);
     return completedArray;
 }
 
@@ -11,6 +10,7 @@ function sortTodoListPriority(todoArray){
 
 function getUnfinishedTodoList(todoArray){
     const completedArray = todoArray.filter(todoObject => !(todoObject.status));
+    completedArray = sortTodoListPriority(completedArray);
     return completedArray;
 }
 
