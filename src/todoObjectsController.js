@@ -49,4 +49,15 @@ function checkDeleteObjectPosition(todoArray,objectPosition,operation){
     }
 }
 
-export {getCompletedTodoList,getUnfinishedTodoList,addTodoObject,deleteTodoObject,moveUpTodoObject,moveDownTodoObject};
+function replaceTodoObject(todoArray,newTodo,todoPosition){
+    todoArray.splice(todoPosition,1,newTodo);
+    return todoArray;
+}
+
+export {getCompletedTodoList,
+    getUnfinishedTodoList,
+    addTodoObject,
+    deleteTodoObject,
+    moveUpTodoObject,
+    moveDownTodoObject,
+    replaceTodoObject};
