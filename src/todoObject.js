@@ -1,4 +1,5 @@
 const createTodo = (_title,_description,_dueDate,_status,_priority,_project)=>{
+    const type = "todo";
     return{
         set title(newTitle){
             _title = newTitle;
@@ -42,6 +43,9 @@ const createTodo = (_title,_description,_dueDate,_status,_priority,_project)=>{
             _dueDate = newDueDate;
             _priority = newPriority;
             _project = newProject;
+        },
+        get type(){
+             return type;
         }
     }
 }
