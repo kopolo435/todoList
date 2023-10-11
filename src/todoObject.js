@@ -35,6 +35,13 @@ const createTodo = (_title,_description,_dueDate,_status,_priority,_project)=>{
         },
         get status(){
             return _status;
+        },
+        updateObject : (newTitle,newDescription,newDueDate,newPriority,newProject)=>{
+            _title = newTitle;
+            _description = newDescription;
+            _dueDate = newDueDate;
+            _priority = newPriority;
+            _project = newProject;
         }
     }
 }
