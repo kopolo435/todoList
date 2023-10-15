@@ -71,21 +71,17 @@ const createCheckList = (title,stringListCheck,dueDate,priority,project)=>{
             this.dueDate = newDueDate;
             this.priority = newPriority;
             this.project = newProject;
+        },
+        deleteCheck : function(checkPosition){
+            this.checkList.splice(checkPosition,1);
+        },
+        changeCheckStatus : function(checkPosition){
+            this.checkList[checkPosition].changeStatus();
+        },
+        changeCheckTitle : function(checkPosition,newTitle){
+            this.checkList[checkPosition].title = newTitle;
         }
     }
 }
 
 
-let check1 = "barrer";
-let check2 = "comer";
-let check3 = "dormir";
-
-let checkArray = [check1,check2,check3];
-
-let checkListObject = createCheckList("tareas1",checkArray,"mañana","2","kolo");
-
-console.log(checkListObject.checkList);
-checkArray.push("jugar mucho");
-checkListObject.updateCheckList("Tareas del jueves",checkArray,"mañana","1","tareas");
-
-console.log("2")
