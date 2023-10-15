@@ -84,4 +84,4 @@ const createCheckList = (title,stringListCheck,dueDate,priority,project)=>{
     }
 }
 
-
+export {createCheck,createCheckList};
