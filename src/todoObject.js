@@ -1,3 +1,4 @@
+import format from 'date-fns/format'
 const createTodo = (_title,_description,_dueDate,_status,_priority,_project)=>{
     const type = "todo";
     return{
@@ -46,6 +47,10 @@ const createTodo = (_title,_description,_dueDate,_status,_priority,_project)=>{
         },
         get type(){
              return type;
+        },
+        getFormatedDate : function(){
+
+            return format(_dueDate,P);
         }
     }
 }
