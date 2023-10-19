@@ -1,4 +1,4 @@
-import format from 'date-fns/format'
+import format from 'date-fns/format/index.js'
 const createTodo = (_title,_description,_dueDate,_status,_priority,_project)=>{
     const type = "todo";
     return{
@@ -15,7 +15,7 @@ const createTodo = (_title,_description,_dueDate,_status,_priority,_project)=>{
             return _description;
         },
         set dueDate(newDueDate){
-            _dueDate = newDueDate;
+            _dueDate = newDueDate+"hola";
         },
         get dueDate(){
             return _dueDate;
@@ -50,9 +50,8 @@ const createTodo = (_title,_description,_dueDate,_status,_priority,_project)=>{
         },
         getFormatedDate : function(){
 
-            return format(_dueDate,P);
+            return format(_dueDate,"P");
         }
     }
 }
-
-export default createTodo;
+ export default createTodo;
