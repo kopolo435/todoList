@@ -6,3 +6,6 @@ dist/
 
 #Ignora archivo de indicaciones
 todo.txt
+
+#Ignora archivo JSON de prueba
+output.json
