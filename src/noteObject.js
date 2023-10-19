@@ -41,6 +41,10 @@ const createNote = (title,noteText,lastModifiedDate,priority,project)=>{
         },
         get type(){
             return type;
+        },
+        getFormatedDate : function(){
+
+            return format(lastModifiedDate,"P");
         }
     }
 }
