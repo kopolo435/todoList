@@ -15,7 +15,7 @@ const createCheck = (title,status=false)=>{
         },
         changeStatus : ()=>{
             status = status ? false:true;
-        },
+        }
 
     }
 }
@@ -80,6 +80,10 @@ const createCheckList = (title,stringListCheck,dueDate,priority,project)=>{
         },
         changeCheckTitle : function(checkPosition,newTitle){
             this.checkList[checkPosition].title = newTitle;
+        },
+        getFormatedDate : function(){
+
+            return format(dueDate,"P");
         }
     }
 }
