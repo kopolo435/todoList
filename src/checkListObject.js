@@ -20,17 +20,9 @@ const createCheck = (title,status=false)=>{
     }
 }
 
-const createCheckList = (title,stringListCheck,dueDate,priority,project)=>{
+const createCheckList = (title,checkList,dueDate,priority,project)=>{
     const type = "checkList";
-    let checkList = []
-    const  createChecks = (stringListCheck)=>{
-        let newCheckList = [];
-        stringListCheck.forEach(element => {
-            newCheckList.push(createCheck(element));
-        });
-        return newCheckList;
-    }
-    checkList = createChecks(stringListCheck);
+    
     return{
         get title(){
             return title;
