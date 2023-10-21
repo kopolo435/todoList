@@ -20,7 +20,8 @@ function addTodoObject(todoObject,todoArray){
 }
 
 function deleteTodoObject(todoArray,objectPosition){
-    return todoArray.splice(objectPosition,1);
+    todoArray.splice(objectPosition,1)
+    return todoArray;
 }
 
 function moveUpTodoObject(todoArray,objectPosition,todoObject){
