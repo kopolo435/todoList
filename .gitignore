@@ -9,3 +9,6 @@ todo.txt
 
 #Ignora archivo JSON de prueba
 output.json
+
+#Ignora archivo de pruebas de interfaz
+interfazConsola.js
