@@ -1,5 +1,5 @@
 import format from 'date-fns/format/index.js'
-const createTodo = (_title,_description,_dueDate,_status,_priority,_project)=>{
+const createTodo = (_title,_description,_dueDate,_priority,_project,_status=false)=>{
     const type = "todo";
     return{
         set title(newTitle){
