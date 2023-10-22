@@ -1,4 +1,4 @@
-const createNote = (title,noteText,lastModifiedDate,priority,project)=>{
+const createNote = (title,noteText,lastModifiedDate,priority,project,status=false)=>{
     const type = "note";
 
     return{
@@ -25,6 +25,12 @@ const createNote = (title,noteText,lastModifiedDate,priority,project)=>{
         },
         set priority(newPriority){
             priority = newPriority;
+        },
+        get status(){
+            return status
+        },
+        updateStatuts(){
+            status = status ? false : true;
         },
         get project(){
             return project;
