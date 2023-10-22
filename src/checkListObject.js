@@ -20,7 +20,7 @@ const createCheck = (title,status=false)=>{
     }
 }
 
-const createCheckList = (title,checkList,dueDate,priority,project)=>{
+const createCheckList = (title,checkList,dueDate,priority,project,status=false)=>{
     const type = "checkList";
     
     return{
@@ -56,6 +56,12 @@ const createCheckList = (title,checkList,dueDate,priority,project)=>{
         },
         get type(){
             return type;
+        },
+        get status(){
+            return status;
+        },
+        set status(newStatus){
+            status = newStatus;
         },
         updateCheckList : function(newTitle,newCheckList,newDueDate,newPriority,newProject){
             this.title = newTitle;
