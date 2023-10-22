@@ -82,6 +82,15 @@ const createCheckList = (title,checkList,dueDate,priority,project,status=false)=
         getFormatedDate : function(){
 
             return format(dueDate,"P");
+        },
+        updateStatus : function(){
+            let newStatus = true;
+            this.checkList.forEach(check => {
+                if (!(check.status)){
+                    newStatus = false;
+                }
+            });
+            this.status = newStatus;
         }
     }
 }
