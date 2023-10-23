@@ -23,7 +23,13 @@ header{
 }
 
 main{
+    padding: 0px !important;
+    margin: 0px !important;
     flex: 1;
+}
+
+#content{
+    height: 82%;
     background-color: var(--color-canvas);
 }
 
@@ -34,3 +40,17 @@ main{
 footer{
     background-color: var(--third-color);
 }
+
+aside{
+    /* height: 30px; */
+}
+
+@media (min-width: 576px) {
+    aside {
+      height: auto; /* Tamaño específico para el aside cuando hay dos filas */
+    }
+    #content{
+        flex: 1;
+        height: auto;
+    }
+  }
