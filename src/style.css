@@ -1,6 +1,7 @@
 :root{
     --main-color : #272829;
     --secundary-color: #61677A;
+    --third-color: #D8D9DA;
     --color-canvas: #FFF6E0;
 
     /*Colores para prioridades de elementos*/
@@ -17,6 +18,19 @@ body{
     height: 100vh;
 }
 
+header{
+    background-color: var(--main-color);
+}
+
 main{
     flex: 1;
+    background-color: var(--color-canvas);
+}
+
+#projects{
+    background-color: var(--secundary-color);
+}
+
+footer{
+    background-color: var(--third-color);
 }
