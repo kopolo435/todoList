@@ -1,3 +1,16 @@
+:root{
+    --main-color : #272829;
+    --secundary-color: #61677A;
+    --color-canvas: #FFF6E0;
+
+    /*Colores para prioridades de elementos*/
+    --priority-first:#FF5733;
+    --priority-second:#FFA533;
+    --priority-third:#FFE433;
+    --priority-fourth:#33FF57;
+    --priority-default:#33A1FF;
+}
+
 body{
     display: flex;
     flex-direction: column;
@@ -5,5 +18,5 @@ body{
 }
 
 main{
-    background-color: red;
+    flex: 1;
 }
