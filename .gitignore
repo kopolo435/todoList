@@ -12,3 +12,6 @@ output.json
 
 #Ignora archivo de pruebas de interfaz
 interfazConsola.js
+
+#ignora copia de index.js
+index copy.js
