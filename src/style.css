@@ -42,7 +42,7 @@ footer{
 }
 
 aside{
-    /* height: 30px; */
+     height: 10vh; 
 }
 
 #todoContainer{
@@ -125,18 +125,6 @@ aside{
     grid-row: 2/3;
     grid-column: 2/5;
 }
-
-/*
-            <div id="todoContainer">
-                <div class="todo">
-                    <button>C</button>
-                    <h6 class="taskTitle">Titulo</h6>
-                    <p class="taskDueDate">12/20/2023</p>
-                    <p class="taskProject">Default</p>
-                    <p class="todoDescription">Lorem ipsum dolor sit amet.</p>
-                </div>
-            </div>
-*/
 
 @media (min-width: 576px) {
     aside {
