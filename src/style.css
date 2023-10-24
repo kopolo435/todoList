@@ -45,6 +45,51 @@ aside{
     /* height: 30px; */
 }
 
+#todoContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.todo{
+    display: grid;
+    grid-template-columns: 50px repeat(3,1fr);
+    grid-template-rows: repeat(2,1fr);
+}
+
+.todo button{
+    grid-row: 1/3;
+    grid-column: 1/2;
+}
+
+.todoTop{
+    grid-row: 1/2;
+    grid-column: 2/5;
+    display: flex;
+    justify-content: space-between;
+}
+
+.taskProject{
+    display: none;
+}
+
+.todoDescription{
+    grid-row: 2/3;
+    grid-column: 2/5;
+}
+
+/*
+            <div id="todoContainer">
+                <div class="todo">
+                    <button>C</button>
+                    <h6 class="taskTitle">Titulo</h6>
+                    <p class="taskDueDate">12/20/2023</p>
+                    <p class="taskProject">Default</p>
+                    <p class="todoDescription">Lorem ipsum dolor sit amet.</p>
+                </div>
+            </div>
+*/
+
 @media (min-width: 576px) {
     aside {
       height: auto; /* Tamaño específico para el aside cuando hay dos filas */
