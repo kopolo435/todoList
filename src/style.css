@@ -60,6 +60,7 @@ aside{
     padding: 5px 10px;
     border-radius: 20px;
     gap: 5px;
+    width: 100%;
 }
 
 .note{
@@ -70,6 +71,7 @@ aside{
     padding: 5px 10px;
     border-bottom-right-radius: 30px;
     gap: 5px;
+    width: 100%;
 }
 
 .checkList{
@@ -79,6 +81,7 @@ aside{
     background-color: var(--priority-default);
     padding: 5px 10px;
     gap: 5px;
+    width: 100%;
 }
 
 .check{
@@ -146,7 +149,7 @@ aside{
   }
 
   @media (min-width: 355px) {
-    .todo{
+    .todo, .note, .checkList{
       width: 80%; /* Tamaño específico para el aside cuando hay dos filas */
     }
 
