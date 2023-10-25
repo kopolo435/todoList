@@ -105,6 +105,12 @@ footer{
     bottom: 10vh;
     right: 2vh;
     width: fit-content;
+    background-color: var(--secundary-color);
+    color: white;
+    border-radius: 30px;
+    padding: 5px 10px;
+    font-size: 20px;
+    border: none;
 }
 
 .todo{
