@@ -32,8 +32,10 @@ main{
 }
 
 #content{
-    height: 82%;
+    height: 100%;
     background-color: var(--color-canvas);
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 #projectTItle{
