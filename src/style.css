@@ -88,6 +88,18 @@ footer{
 #completedContainer.show{
     display: flex;
 }
+
+#btnContainer{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+
+#btnContainer button{
+    height: fit-content;
+}
+
 .todo{
     display: grid;
     grid-template-columns: auto repeat(3,1fr);
