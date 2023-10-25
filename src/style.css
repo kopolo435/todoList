@@ -34,7 +34,7 @@ main{
 #content{
     background-color: var(--color-canvas);
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 #projectTItle{
@@ -73,6 +73,21 @@ footer{
     margin-bottom: 10px;
 }
 
+#completedContainer{
+    flex-direction: column;
+    padding-top: 10px;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+} 
+
+#completedContainer.collapsing{
+    display: flex;
+}
+
+#completedContainer.show{
+    display: flex;
+}
 .todo{
     display: grid;
     grid-template-columns: auto repeat(3,1fr);
