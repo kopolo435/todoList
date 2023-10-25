@@ -12,6 +12,24 @@
     <script src="https://kit.fontawesome.com/35b83aded8.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
     <header>
         <img src="" alt="Logo Todo App">
         <p>Soy un header</p>
@@ -36,7 +54,7 @@
             <h1 id="projectTItle" class="d-sm-block text-center">Titulo del proyecto</h1>
             <div id="todoContainer">
                 <div class="todo">
-                    <button class="todoCheck"><i class="fa-solid fa-check"></i></button>
+                    <button class="todoCheck btn"><i class="fa-solid fa-check"></i></button>
                     <div class="todoTop">
                         <p>Titulo</p>
                         <p class="taskDueDate">12/20/2023</p>
@@ -46,7 +64,7 @@
                 </div>
 
                 <div class="note">
-                    <button class="todoCheck"></button>
+                    <button class="todoCheck btn"></button>
                     <div class="todoTop">
                         <p>Titulo</p>
                         <p class="taskDueDate">12/20/2023</p>
@@ -63,15 +81,15 @@
                     </div>
                     <div class="checksContainer">
                         <div class="check">
-                            <button class="listCheckBtn"><i class="fa-solid fa-check"></i></button>
+                            <button class="listCheckBtn btn"><i class="fa-solid fa-check"></i></button>
                             <p class="checkText">Check1</p>
                         </div>
                         <div class="check">
-                            <button class="listCheckBtn"></button>
+                            <button class="listCheckBtn btn"></button>
                             <p class="checkText">Check2</p>
                         </div>
                         <div class="check">
-                            <button class="listCheckBtn"><i class="fa-solid fa-check"></i></button>
+                            <button class="listCheckBtn btn"><i class="fa-solid fa-check"></i></button>
                             <p class="checkText">Check3</p>
                         </div>
                     </div>
@@ -83,7 +101,7 @@
                     <i class="fa-solid fa-caret-down fa-xl show"></i>
                     <i class="fa-solid fa-caret-up fa-xl not-show"></i>
                 </button>
-                <button id="addBtn"><i class="fa-solid fa-plus fa-2xl"></i></button>
+                <button id="addBtn" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus fa-2xl"></i></button>
             </div>
             <div id="completedContainer" class="collapse">
                 <div class="checkList">
@@ -102,7 +120,7 @@
                             <p class="checkText">Check2</p>
                         </div>
                         <div class="check">
-                            <button class="listCheckBtn">C</button>
+                            <button class="listCheckBtn ">C</button>
                             <p class="checkText">Check3</p>
                         </div>
                     </div>
