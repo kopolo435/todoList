@@ -12,10 +12,13 @@
     --priority-default:#33A1FF;
 }
 
+html, body {
+    height: 100%;
+}
+
 body{
     display: flex;
     flex-direction: column;
-    height: 100vh;
 }
 
 header{
@@ -33,6 +36,10 @@ main{
     background-color: var(--color-canvas);
 }
 
+#projectTItle{
+    display: none;
+}
+
 #projects{
     background-color: var(--secundary-color);
 }
@@ -43,6 +50,10 @@ footer{
 
 aside{
      height: 10vh; 
+}
+
+#asideTitle{
+    display: none;
 }
 
 #todoContainer{
