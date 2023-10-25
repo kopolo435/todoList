@@ -224,3 +224,12 @@ footer{
     }
 
   }
+
+/*Reglas para cambiar simbolo de btn al mostrar o ocultar listas*/
+#projectsBtn.collapsed .not-show{
+    display: none;
+}
+
+#projectsBtn:not(.collapsed) .show{
+    display: none;
+}
