@@ -78,7 +78,11 @@
                 </div>
             </div>
             <div id="btnContainer">
-                <button id="expandCompleted" type="button" data-bs-toggle="collapse" data-bs-target="#completedContainer" aria-expanded="false" aria-controls="completedContainer">Completados</button>
+                <button id="expandCompleted" class="collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#completedContainer" aria-expanded="false" aria-controls="completedContainer">
+                    Completados
+                    <i class="fa-solid fa-caret-down fa-xl show"></i>
+                    <i class="fa-solid fa-caret-up fa-xl not-show"></i>
+                </button>
                 <button id="addBtn"><i class="fa-solid fa-plus fa-2xl"></i></button>
             </div>
             <div id="completedContainer" class="collapse">

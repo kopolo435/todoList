@@ -96,8 +96,11 @@ footer{
     padding-top: 20px;
 }
 
-#btnContainer button{
+#expandCompleted{
     height: fit-content;
+    background-color: transparent;
+    color: gray;
+    border: none;
 }
 
 #addBtn{
@@ -231,5 +234,13 @@ footer{
 }
 
 #projectsBtn:not(.collapsed) .show{
+    display: none;
+}
+
+#expandCompleted.collapsed .not-show{
+    display: none;
+}
+
+#expandCompleted:not(.collapsed) .show{
     display: none;
 }
