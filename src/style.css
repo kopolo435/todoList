@@ -42,14 +42,20 @@ main{
 
 #projects{
     background-color: var(--secundary-color);
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    flex-direction: column;
+}
+
+#asideTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 footer{
     background-color: var(--third-color);
-}
-
-aside{
-     height: 10vh; 
 }
 
 #asideTitle{
