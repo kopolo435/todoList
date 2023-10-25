@@ -100,6 +100,13 @@ footer{
     height: fit-content;
 }
 
+#addBtn{
+    position: fixed;
+    bottom: 10vh;
+    right: 2vh;
+    width: fit-content;
+}
+
 .todo{
     display: grid;
     grid-template-columns: auto repeat(3,1fr);
