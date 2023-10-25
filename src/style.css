@@ -56,8 +56,12 @@ main{
     color: white;
 }
 
-#asideTop .show{
+#asideTop .show, #asideTop .not-show{
     color: white;
+}
+
+#proyectosContainer p:hover{
+    font-weight: bold;
 }
 
 footer{
