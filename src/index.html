@@ -75,9 +75,31 @@
                     </div>
                 </div>
             </div>
-            <button id="expandCompleted">Completados</button>
+            <button id="expandCompleted" type="button" data-bs-toggle="collapse" data-bs-target="#completedContainer" aria-expanded="false" aria-controls="completedContainer">Completados</button>
             <button id="addBtn">Agregar Todo</button>
-            <div id="completedContainer"></div>
+            <div id="completedContainer" class="collapse">
+                <div class="checkList">
+                    <div class="todoTop">
+                        <p>Titulo</p>
+                        <p class="taskDueDate">12/20/2023</p>
+                        <p class="taskProject d-sm-block">Default</p>
+                    </div>
+                    <div class="checksContainer">
+                        <div class="check">
+                            <button class="listCheckBtn">C</button>
+                            <p class="checkText">Check1</p>
+                        </div>
+                        <div class="check">
+                            <button class="listCheckBtn">C</button>
+                            <p class="checkText">Check2</p>
+                        </div>
+                        <div class="check">
+                            <button class="listCheckBtn">C</button>
+                            <p class="checkText">Check3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     <footer><a href="">@Kopolo435</a></footer>
