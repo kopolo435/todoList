@@ -53,6 +53,11 @@ main{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: white;
+}
+
+#asideTop .show{
+    color: white;
 }
 
 footer{
@@ -63,6 +68,10 @@ footer{
 
 #asideTitle{
     display: none;
+}
+
+#currentProjectTitle{
+    color: white;
 }
 
 #todoContainer{
