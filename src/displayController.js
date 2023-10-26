@@ -110,3 +110,15 @@ function createNoteDisplay(todoObj,id){
 
     return todoDisplay;
 }
+
+/*Crea el elemento html para un checklist*/
+function createCheckListDisplay(todoObj,id){
+    let checklistDisplay = document.createElement("div");
+    let classColor = getPriorityColor(todoObj.priority);
+    checklistDisplay.classList.add("checkList",classColor);
+    checklistDisplay.setAttribute.add("data-id",id);
+
+    
+    checklistDisplay.appendChild(createTodoTop(todoObj.title,todoObj.getFormatedDate(),todoObj.project));
+    checklistDisplay.appendChild(createChecks(todoObj.checkList));
+}
