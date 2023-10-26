@@ -96,3 +96,17 @@ function getPriorityColor(priority){
     }
     return color;
 }
+
+/*Crea el elemento html para display de un note */
+function createNoteDisplay(todoObj,id){
+    let todoDisplay = document.createElement("div");
+    let classColor = getPriorityColor(todoObj.priority);
+    todoDisplay.classList.add("note",classColor);
+    todoDisplay.setAttribute("data-id",id);
+
+    todoDisplay.appendChild(createTodoCheckBtn(todoObj.status));
+    todoDisplay.appendChild(createTodoTop(todoObj.title,todoObj.getFormatedDate(),todoObj.project));
+    todoDisplay.appendChild(createTodoDescription(todoObj.description));
+
+    return todoDisplay;
+}
