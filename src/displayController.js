@@ -20,7 +20,7 @@ function createTodoDisplay(todoObj,id){
     todoDisplay.setAttribute("data-id",id);
 
     todoDisplay.appendChild(createTodoCheckBtn(todoObj.status));
-    todoDisplay.appendChild(createTodoTop(todoObj.title,todoObj.dueDate,todoObj.project));
+    todoDisplay.appendChild(createTodoTop(todoObj.title,todoObj.getFormatedDate(),todoObj.project));
     todoDisplay.appendChild(createTodoDescription(todoObj.description));
 
     return todoDisplay;
