@@ -271,8 +271,17 @@ footer{
     gap: 5px;
 }
 
+label p{
+    margin: 0px;
+}
+
 #createHeader{
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.modal-content{
+    background: #61677A;
+    color: white;
 }
