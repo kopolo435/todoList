@@ -120,5 +120,33 @@ function createCheckListDisplay(todoObj,id){
 
     
     checklistDisplay.appendChild(createTodoTop(todoObj.title,todoObj.getFormatedDate(),todoObj.project));
-    checklistDisplay.appendChild(createChecks(todoObj.checkList));
+    checklistDisplay.appendChild(createChecksContainer(todoObj.checkList));
+}
+/*Crear contenedor que almacena los distintos checks*/
+function createChecksContainer(checksArray){
+    let checksContainer = document.createElement("div");
+    checksContainer.classList.add("checksContainer");
+    checksArray.forEach(checkObj => {
+        checksContainer.appendChild(createCheck(checkObj.title,checkObj.status));
+    });
+}
+
+function createCheck(title,status){
+    let check  = document.createElement("div");
+    check.classList.add("check");
+
+    let miniCheckBtn = document.createElement("button");
+    miniCheckBtn.classList.add("listCheckBtn", "btn");
+    if(status){
+        let buttonSymbol = document.createElement("i");
+        buttonSymbol.classList.add("fa-solid", "fa-check");
+        miniCheckBtn.appendChild(buttonSymbol);
+    }
+
+    let checkTitle = document.createElement("p");
+    checkTitle.classList.add("checkText");
+    checkTitle.textContent = title;
+
+    check.replaceChildren(miniCheckBtn,checkTitle);
+    return check;
 }
