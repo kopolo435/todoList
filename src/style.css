@@ -285,3 +285,17 @@ label p{
     background: #61677A;
     color: white;
 }
+
+#selectType,#createTitle,#createFecha,#createProject,#createPriority,#createInfo{
+    border-radius: 5px;
+    border: 2px solid transparent;
+}
+
+#createTitle,#createFecha,#createInfo,#createProject{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#selectType{
+    margin-left: 5px;
+}
