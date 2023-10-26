@@ -263,6 +263,7 @@ footer{
 .sideLabel{
     display: flex;
     gap: 5px;
+    align-items: baseline;
 }
 
 .topLabel{
@@ -286,6 +287,7 @@ label p{
     color: white;
 }
 
+/*Reglas para los inputs del modal */
 #selectType,#createTitle,#createFecha,#createProject,#createPriority,#createInfo{
     border-radius: 5px;
     border: 2px solid transparent;
@@ -298,4 +300,18 @@ label p{
 
 #selectType{
     margin-left: 5px;
+}
+
+#createChecksContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.createCheck{
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid black;
+    color: white;
+    flex: 1;
 }
