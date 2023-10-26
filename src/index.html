@@ -18,48 +18,45 @@
         <div class="modal-content">
             <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">Crear tarea</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
             <label for="selectType" class="selectChoice">
-                Tipo de tarea:
                 <select name="" id="selectType">
                     <option value="todo">To do</option>
                     <option value="note">Note</option>
                     <option value="checklist">Checklist</option>
                 </select>
             </label>
-            <div id="createHeader">
-                <label for="createTitle" class="topLabel">
-                    Nombre tarea
-                    <input type="text" name="title" id="createTitle" placeholder="Nombre tarea">
-                </label>
-                <label for="createFecha" class="sideLabel">
-                    Fecha limite
-                    <input type="date" name="fecha" id="createFecha">
-                </label>
-                <label for="createProject" class="topLabel">
-                    Proyecto
-                    <input type="text" name="project" id="createProject" placeholder="Default">
-                </label>
-                <label for="createPriority" class="sideLabel">
-                    Prioridad
-                    <select name="priority" id="createPriority">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5" selected>5</option>
-                    </select>
-                </label>
-                <label for="createInfo" class="topLabel">
-                    Descripcion
-                    <textarea name="info" id="createInfo" cols="30" rows="5" placeholder="Agregar descripcion"></textarea>
-                </label>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" id="createTarea">
-
-            </form>
+            <div class="modal-body">
+                <div id="createHeader">
+                    <label for="createTitle" class="topLabel">
+                        Nombre tarea
+                        <input type="text" name="title" id="createTitle" placeholder="Nombre tarea">
+                    </label>
+                    <label for="createFecha" class="sideLabel">
+                        Fecha limite
+                        <input type="date" name="fecha" id="createFecha">
+                    </label>
+                    <label for="createProject" class="topLabel">
+                        <p data-bs-toggle="tooltip"  title="Grupo donde se guardara la tarea">Proyecto</p>
+                        <input type="text" name="project" id="createProject" placeholder="Default">
+                    </label>
+                    <label for="createPriority" class="sideLabel" data-bs-toggle="tooltip"  title="ddd">
+                        <p data-bs-toggle="tooltip"  title="La prioridad 1 es la mas alta"> Prioridad</p>
+                        <select name="priority" id="createPriority">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5" selected>5</option>
+                        </select>
+                    </label>
+                    <label for="createInfo" class="topLabel">
+                        Descripcion
+                        <textarea name="info" id="createInfo" cols="30" rows="5" placeholder="Agregar descripcion"></textarea>
+                    </label>
+                </div>
+            <form action="" id="createTarea"></form>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
