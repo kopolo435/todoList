@@ -25,3 +25,16 @@ function createTodoDisplay(todoObj,id){
 
     return todoDisplay;
 }
+
+function createTodoCheckBtn(completedStatus){
+    let todoBtn = document.createElement("button");
+    todoBtn.classList.add("todoCheck","btn");
+
+    if(completedStatus){
+        let buttonSymbol = document.createElement("i");
+        buttonSymbol.classList.add("fa-solid", "fa-check");
+        todoBtn.appendChild(buttonSymbol);
+    }
+
+    return todoBtn;
+}
