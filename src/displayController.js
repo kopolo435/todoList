@@ -13,6 +13,7 @@ function createElement(todoObj,id){
     return todoElement;
 }
 
+//Crea el display de un objeto de type "todo"
 function createTodoDisplay(todoObj,id){
     let todoDisplay = document.createElement("div");
     let classColor = getPriorityColor(todoObj.priority);
@@ -26,6 +27,8 @@ function createTodoDisplay(todoObj,id){
     return todoDisplay;
 }
 
+/*Crea el boton que permite marcar una tarea/todo como completado 
+Toma como argumento el status para decidir si marcar el simbolo de completado*/
 function createTodoCheckBtn(completedStatus){
     let todoBtn = document.createElement("button");
     todoBtn.classList.add("todoCheck","btn");
@@ -39,6 +42,7 @@ function createTodoCheckBtn(completedStatus){
     return todoBtn;
 }
 
+/*Crea el contenedor que contiene la informacion caracteristica del todo*/ 
 function createTodoTop(title,date,project){
     let todoTop = document.createElement("div");
     todoTop.classList.add("todoTop");
@@ -58,4 +62,13 @@ function createTodoTop(title,date,project){
     todoTop.replaceChildren(topTitle,topDate,topProject);
 
     return todoTop;
+}
+
+/*Crea el elemento que muestra la descripción del todo*/
+function createTodoDescription(descripcion){
+    let descriptionDisplay = document.createElement("p");
+    descriptionDisplay.classList.appendChild("todoDescription");
+    descriptionDisplay.textContent = descripcion;
+
+    return descriptionDisplay;
 }
