@@ -15,12 +15,13 @@ function createElement(todoObj,id){
 
 function createTodoDisplay(todoObj,id){
     let todoDisplay = document.createElement("div");
-    todoDisplay.classList.add("todo");
+    let classColor = getPriorityColor(todoObj.priority);
+    todoDisplay.classList.add("todo",classColor);
     todoDisplay.setAttribute("data-id",id);
 
     todoDisplay.appendChild(createTodoCheckBtn());
-    todoDisplay.appendChild(createTodoTop());
-    todoDisplay.appendChild(createTodoDescription());
+    todoDisplay.appendChild(createTodoTop(todoObj.title,todoObj.dueDate,todoObj.project));
+    todoDisplay.appendChild(createTodoDescription(todoObj.description));
 
     return todoDisplay;
 }
