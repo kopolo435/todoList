@@ -51,12 +51,22 @@
                             <option value="5" selected>5</option>
                         </select>
                     </label>
-                    <label for="createInfo" class="topLabel">
+<!--                     <label for="createInfo" class="topLabel">
                         Descripcion
                         <textarea name="info" id="createInfo" cols="30" rows="5" placeholder="Agregar descripcion"></textarea>
-                    </label>
+                    </label> -->
+                    <div id="createChecksContainer">
+                        <label for="check1" class="sideLabel">
+                            <p class="checkLabel">Check 1:</p>
+                            <input type="text" class="createCheck" name="check1" id="check1">
+                        </label>
+                        <label for="check2" class="sideLabel">
+                            <p class="checkLabel">Check 2:</p>
+                            <input type="text" class="createCheck" name="check2" id="check2">
+                        </label>
+                    </div>
+                    
                 </div>
-            <form action="" id="createTarea"></form>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
