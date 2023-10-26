@@ -257,3 +257,22 @@ footer{
 #expandCompleted:not(.collapsed) .show{
     display: none;
 }
+
+/*Reglas para el modal*/
+
+.sideLabel{
+    display: flex;
+    gap: 5px;
+}
+
+.topLabel{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#createHeader{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
