@@ -72,3 +72,27 @@ function createTodoDescription(descripcion){
 
     return descriptionDisplay;
 }
+
+/*Determina la clase del elemento segun su prioridad*/
+function getPriorityColor(priority){
+    let color;
+    switch (priority) {
+        case 1:
+            color = "bg-priority1";
+            break;
+        case 2:
+            color = "bg-priority2";
+            break;
+        case 3:
+            color = "bg-priority3";
+            break;
+        case 4:
+            color = "bg-priority4";
+            break;
+    
+        default:
+            color = "bg-priority5";
+            break;
+    }
+    return color;
+}
