@@ -38,3 +38,24 @@ function createTodoCheckBtn(completedStatus){
 
     return todoBtn;
 }
+
+function createTodoTop(title,date,project){
+    let todoTop = document.createElement("div");
+    todoTop.classList.add("todoTop");
+
+    let topTitle = document.createElement("p");
+    topTitle.classList.add("taskTitle");
+    topTitle.textContent = title;
+
+    let topDate = document.createElement("p");
+    topDate.classList.add("taskDueDate");
+    topDate.textContent = date;
+
+    let topProject = document.createElement("p");
+    topProject.classList.add("taskProject", "d-sm-block");
+    topProject.textContent = project;
+
+    todoTop.replaceChildren(topTitle,topDate,topProject);
+
+    return todoTop;
+}
