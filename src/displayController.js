@@ -116,11 +116,13 @@ function createCheckListDisplay(todoObj,id){
     let checklistDisplay = document.createElement("div");
     let classColor = getPriorityColor(todoObj.priority);
     checklistDisplay.classList.add("checkList",classColor);
-    checklistDisplay.setAttribute.add("data-id",id);
+    checklistDisplay.setAttribute("data-id",id);
 
     
     checklistDisplay.appendChild(createTodoTop(todoObj.title,todoObj.getFormatedDate(),todoObj.project));
     checklistDisplay.appendChild(createChecksContainer(todoObj.checkList));
+
+    return checklistDisplay;
 }
 /*Crear contenedor que almacena los distintos checks*/
 function createChecksContainer(checksArray){
@@ -129,6 +131,7 @@ function createChecksContainer(checksArray){
     checksArray.forEach(checkObj => {
         checksContainer.appendChild(createCheck(checkObj.title,checkObj.status));
     });
+    return checksContainer;
 }
 
 function createCheck(title,status){
