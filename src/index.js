@@ -9,7 +9,7 @@ import createElement from './displayController.js'
 
 const addBtn = document.getElementById("addBtn");
 const projectsContainer = document.getElementById("todoContainer");
-
+const completedProjectsContainer = document.getElementById("completedContainer")
 
 function updateShownProjects(currentProject,projectsArray){
 
