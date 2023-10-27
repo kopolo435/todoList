@@ -67,7 +67,7 @@ function createTodoTop(title,date,project){
 /*Crea el elemento que muestra la descripción del todo*/
 function createTodoDescription(descripcion){
     let descriptionDisplay = document.createElement("p");
-    descriptionDisplay.classList.appendChild("todoDescription");
+    descriptionDisplay.classList.add("todoDescription");
     descriptionDisplay.textContent = descripcion;
 
     return descriptionDisplay;
@@ -77,16 +77,16 @@ function createTodoDescription(descripcion){
 function getPriorityColor(priority){
     let color;
     switch (priority) {
-        case 1:
+        case "1":
             color = "bg-priority1";
             break;
-        case 2:
+        case "2":
             color = "bg-priority2";
             break;
-        case 3:
+        case "3":
             color = "bg-priority3";
             break;
-        case 4:
+        case "4":
             color = "bg-priority4";
             break;
     
