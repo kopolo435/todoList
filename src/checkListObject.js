@@ -96,4 +96,12 @@ const createCheckList = (title,checkList,dueDate,priority,project,status=false)=
     }
 }
 
-export {createCheck,createCheckList};
+function createChecksArray(stringListCheck){
+    let newCheckList = [];
+    stringListCheck.forEach(element => {
+        newCheckList.push(createCheck(element));
+    });
+    return newCheckList;
+  }
+
+export {createCheck,createCheckList,createChecksArray};
