@@ -15,3 +15,6 @@ interfazConsola.js
 
 #ignora copia de index.js
 index copy.js
+
+#ingnora archivo con datos de test
+testInput.js
