@@ -150,3 +150,5 @@ function createCheck(title,status){
     check.replaceChildren(miniCheckBtn,checkTitle);
     return check;
 }
+
+export default createElement;
