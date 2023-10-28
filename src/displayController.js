@@ -8,7 +8,8 @@ function createElement(todoObj,id){
     }else if(todoObj.type ==="checkList"){
         todoElement = createCheckListDisplay(todoObj,id);
     }else{
-        todoElement = createErrorDisplay();
+        // todoElement = createErrorDisplay();
+        console.log("Error, muy grave")
     }
     return todoElement;
 }
