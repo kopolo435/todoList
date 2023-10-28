@@ -51,7 +51,6 @@ function createTitleLabel(){
     label.setAttribute("for","createTitle");
     label.classList.add("topLabel");
     label.textContent = "Nombre Tarea";
-    label.appendChild(createTitle());
 
     const createTitle = ()=>{
         const title = document.createElement("input");
@@ -62,5 +61,8 @@ function createTitleLabel(){
 
         return title
     }
+    label.appendChild(createTitle());
     return label;
 }
+
+export default updateTypeForm
