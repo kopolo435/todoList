@@ -21,3 +21,27 @@ function createTodoDisplay(){
 
     return elementsArray;
 }
+
+function createNoteDisplay(){
+    let elementsArray = [];
+    
+    elementsArray.push(createTitleLabel());
+    elementsArray.push(createFechaLabel());
+    elementsArray.push(createProjectLabel());
+    elementsArray.push(createPriotityLabel());
+    elementsArray.push(createDescriptionLabel());
+
+    return elementsArray;
+}
+
+function createChecklistDisplay(){
+    let elementsArray = [];
+    
+    elementsArray.push(createTitleLabel());
+    elementsArray.push(createFechaLabel());
+    elementsArray.push(createProjectLabel());
+    elementsArray.push(createPriotityLabel());
+    elementsArray.push(createChecksLabel());
+
+    return elementsArray;
+}
