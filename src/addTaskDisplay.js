@@ -65,4 +65,21 @@ function createTitleLabel(){
     return label;
 }
 
+function createFechaLabel(){
+    const label = document.createElement("label");
+    label.setAttribute("for","createFecha");
+    label.classList.add("sideLabel");
+    label.textContent = "Fecha limite";
+
+    const createFecha = ()=>{
+        const title = document.createElement("input");
+        title.setAttribute("type","date");
+        title.setAttribute("name","fecha");
+        title.setAttribute("id","createFecha");
+        return title
+    }
+    label.appendChild(createFecha());
+    return label
+}
+
 export default updateTypeForm
