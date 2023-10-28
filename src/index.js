@@ -11,8 +11,20 @@ const addBtn = document.getElementById("addBtn");
 const projectsContainer = document.getElementById("todoContainer");
 const completedProjectsContainer = document.getElementById("completedContainer")
 
-function updateShownProjects(currentProject,projectsArray){
-
+let currentProject = "projecto1";
+let projectsArray = testArray;
+function updateShownProjects(){
+    let currentProjectArray = projectsArray.filter(task => task.project === currentProject)
+    currentProjectArray.forEach((taskObj,index) => {
+        console.log("tipo:"+taskObj.type)
+        if(!taskObj.status){
+            projectsContainer.appendChild(createElement(taskObj,index));
+        }
+        else{
+            completedProjectsContainer.appendChild(createElement(taskObj,index));
+        }
+    });
 }
+updateShownProjects();
 
 
