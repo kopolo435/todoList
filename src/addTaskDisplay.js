@@ -136,4 +136,23 @@ function createPriorityLabel(){
     return label;
 }
 
+function createDescriptionLabel(){
+    const label = document.createElement("label");
+    label.setAttribute("for","createInfo");
+    label.classList.add("topLabel");
+    label.textContent = "Descripcion";
+
+    const createTextInput = ()=>{
+        const input = document.createElement("textarea");
+        input.setAttribute("name","info");
+        input.setAttribute("id","createInfo");
+        input.setAttribute("cols","30");
+        input.setAttribute("rows","5");
+        input.setAttribute("placeholder","Agregar descripcion");
+        return input;
+    }
+    label.appendChild(createTextInput);
+    return label;
+}
+
 export default updateTypeForm
