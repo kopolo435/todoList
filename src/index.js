@@ -30,6 +30,7 @@ updateShownProjects();
 
 taskTypeBtn.addEventListener("change",e =>{
     let elementsArray = addTaskDisplay(e.target.value);
+    modalForm.replaceChildren();
     elementsArray.forEach(item =>{
         modalForm.appendChild(item);
     })
