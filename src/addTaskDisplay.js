@@ -4,8 +4,8 @@ function updateTypeForm(currentType){
         formElementArray = createTodoDisplay();
     }else if(currentType === "note"){
         formElementArray = createNoteDisplay();
-    }else if(currentType==="checkList"){
-        formElementArray = createCheckListDisplay();
+    }else if(currentType==="checklist"){
+        formElementArray = createChecklistDisplay();
     }
     return formElementArray;
 }
@@ -41,7 +41,7 @@ function createChecklistDisplay(){
     elementsArray.push(createFechaLabel());
     elementsArray.push(createProjectLabel());
     elementsArray.push(createPriorityLabel());
-    elementsArray.push(createChecksLabel());
+    elementsArray.push(createCheckContainer());
 
     return elementsArray;
 }
@@ -50,7 +50,7 @@ function createTitleLabel(){
     const label = document.createElement("label");
     label.setAttribute("for","createTitle");
     label.classList.add("topLabel");
-    label.textContent = "Nombre Tarea";
+    label.textContent = "Titulo";
 
     const createTitle = ()=>{
         const title = document.createElement("input");
@@ -153,6 +153,49 @@ function createDescriptionLabel(){
     }
     label.appendChild(createTextInput());
     return label;
+}
+
+function createCheckContainer(){
+    const checkContainer = document.createElement("div");
+    checkContainer.setAttribute("id","createChecksContainer");
+    checkContainer.appendChild(createChecksLabel(1));
+    return checkContainer
+}
+
+
+function createChecksLabel(position){
+    const label = document.createElement("label");
+    label.setAttribute("for","check"+position);
+    label.setAttribute("data-position",position);
+    label.classList.add("sideLabel");
+
+    const paragraph = document.createElement("p");
+    paragraph.classList.add("checkLabel");
+    paragraph.textContent = "Check: "+position;
+
+    label.appendChild(paragraph);
+    label.appendChild(createCheck(position));
+    return label
+
+}
+
+function createCheck(position){
+    const check = document.createElement("input");
+    check.setAttribute("type","text");
+    check.setAttribute("name","check"+position);
+    check.setAttribute("id","check"+position)
+    check.setAttribute("data-position",position)
+    check.classList.add("createCheck");
+
+    const addCheckEvent = function(e){
+        if(e.target.value.length >= 3){
+            const checkContainer = document.getElementById("createChecksContainer");
+            checkContainer.appendChild(createChecksLabel(Number(e.target.getAttribute("data-position"))+1));
+            e.target.removeEventListener("keyup",addCheckEvent);
+        }
+    }
+    check.addEventListener("keyup",addCheckEvent);
+    return check;
 }
 
 export default updateTypeForm
