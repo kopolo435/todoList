@@ -15,6 +15,7 @@ const modalForm = document.getElementById("createHeader");
 const saveChangesBtn = document.getElementById("saveChanges");
 
 let currentProject = "projecto1";
+let projectsCategories = getCurrentProjects(testArray);
 let projectsArray = testArray;
 function updateShownProjects(){
     let currentProjectArray = projectsArray.filter(task => task.project === currentProject)
@@ -44,6 +45,7 @@ saveChangesBtn.addEventListener("click", e=>{
         let objArray = callCreateTodo()
         projectsArray.push(objArray[0]);
         currentProject = objArray[1];
+        addNewCategory(objArray[1]);
         updateShownProjects();
     }
 })
@@ -59,3 +61,16 @@ function callCreateTodo(){
     return returnArray;
 }
 
+function getCurrentProjects(objetsArray){
+    let projects = objetsArray.map(item => item.project)
+    const uniqueProjects = (value, index, array)=>{
+        return array.indexOf(value) === index;
+    }
+    return projects.filter(uniqueProjects)
+}
+
+function addNewCategory(project){
+    if(projectsCategories.indexOf(project)>0){
+        projectsCategories.push(project);
+    }
+}
