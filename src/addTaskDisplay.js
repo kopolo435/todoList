@@ -82,4 +82,31 @@ function createFechaLabel(){
     return label
 }
 
+function createProjectLabel(){
+    const label = document.createElement("label");
+    label.setAttribute("for","createProject");
+    label.classList.add("topLabel");
+
+    const createProject = ()=>{
+        const project = document.createElement("input");
+        project.setAttribute("type","text");
+        project.setAttribute("name","project");
+        project.setAttribute("id","createProject");
+        project.setAttribute("placeholder","Default");
+        return project
+    }
+
+    const createToolTip = ()=>{
+        const paragraph = document.createElement("p");
+        paragraph.setAttribute("data-bs-toggle","tooltip");
+        paragraph.setAttribute("title","Grupo donde se guardara la tarea");
+        paragraph.textContent = "Proyecto";
+        return paragraph;
+    }
+
+    label.appendChild(createToolTip());
+    label.appendChild(createProject());
+    return label;
+}
+
 export default updateTypeForm
