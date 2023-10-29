@@ -41,8 +41,9 @@ taskTypeBtn.addEventListener("change",e =>{
 
 saveChangesBtn.addEventListener("click", e=>{
     if(taskTypeBtn.value === "todo"){
-        projectsArray.push(callCreateTodo());
-        console.log(projectsArray);
+        let objArray = callCreateTodo()
+        projectsArray.push(objArray[0]);
+        currentProject = objArray[1];
         updateShownProjects();
     }
 })
@@ -53,7 +54,8 @@ function callCreateTodo(){
     let project = document.getElementById("createProject");
     let priority = document.getElementById("createPriority");
     let description = document.getElementById("createInfo");
-
-    return createTodo(title.value,description.value,new Date(fecha.value),priority.value,project.value);
+    let todoObj = createTodo(title.value,description.value,new Date(fecha.value),priority.value,project.value);
+    let returnArray = [todoObj,todoObj.project];
+    return returnArray;
 }
 
