@@ -72,11 +72,11 @@ function createFechaLabel(){
     label.textContent = "Fecha limite";
 
     const createFecha = ()=>{
-        const title = document.createElement("input");
-        title.setAttribute("type","date");
-        title.setAttribute("name","fecha");
-        title.setAttribute("id","createFecha");
-        return title
+        const fecha = document.createElement("input");
+        fecha.setAttribute("type","date");
+        fecha.setAttribute("name","fecha");
+        fecha.setAttribute("id","createFecha");
+        return fecha
     }
     label.appendChild(createFecha());
     return label
