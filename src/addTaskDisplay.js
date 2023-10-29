@@ -16,7 +16,7 @@ function createTodoDisplay(){
     elementsArray.push(createTitleLabel());
     elementsArray.push(createFechaLabel());
     elementsArray.push(createProjectLabel());
-    elementsArray.push(createPriotityLabel());
+    elementsArray.push(createPriorityLabel);
     elementsArray.push(createDescriptionLabel());
 
     return elementsArray;
@@ -28,7 +28,7 @@ function createNoteDisplay(){
     elementsArray.push(createTitleLabel());
     elementsArray.push(createFechaLabel());
     elementsArray.push(createProjectLabel());
-    elementsArray.push(createPriotityLabel());
+    elementsArray.push(createPriorityLabel);
     elementsArray.push(createDescriptionLabel());
 
     return elementsArray;
@@ -40,7 +40,7 @@ function createChecklistDisplay(){
     elementsArray.push(createTitleLabel());
     elementsArray.push(createFechaLabel());
     elementsArray.push(createProjectLabel());
-    elementsArray.push(createPriotityLabel());
+    elementsArray.push(createPriorityLabel());
     elementsArray.push(createChecksLabel());
 
     return elementsArray;
@@ -96,16 +96,43 @@ function createProjectLabel(){
         return project
     }
 
-    const createToolTip = ()=>{
-        const paragraph = document.createElement("p");
-        paragraph.setAttribute("data-bs-toggle","tooltip");
-        paragraph.setAttribute("title","Grupo donde se guardara la tarea");
-        paragraph.textContent = "Proyecto";
-        return paragraph;
+
+    label.appendChild(createToolTip("Grupo donde se guardara la tarea","Proyecto"));
+    label.appendChild(createProject());
+    return label;
+}
+
+function createToolTip(title,content){
+    const paragraph = document.createElement("p");
+    paragraph.setAttribute("data-bs-toggle","tooltip");
+    paragraph.setAttribute("title",title);
+    paragraph.textContent = content;
+    return paragraph;
+}
+
+function createPriorityLabel(){
+    const label = document.createElement("label");
+    label.setAttribute("for","createPriority");
+    label.classList.add("topLabel");
+
+    const createSelect = ()=>{
+        const select = document.createElement("select");
+        select.setAttribute("name","priority");
+        select.setAttribute("id","createPriority");
+        for(let i=1; i<6;i++){
+            let option = document.createElement("option");
+            if(i===5){
+                option.selected = true;
+            }
+            option.setAttribute("value",i);
+            option.textContent = i;
+            select.appendChild(option)
+        }
+        return select;
     }
 
-    label.appendChild(createToolTip());
-    label.appendChild(createProject());
+    label.appendChild(createToolTip("La prioridad 1 es la mas alta","Prioridad"));
+    label.appendChild(createSelect());
     return label;
 }
 
