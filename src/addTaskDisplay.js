@@ -16,7 +16,7 @@ function createTodoDisplay(){
     elementsArray.push(createTitleLabel());
     elementsArray.push(createFechaLabel());
     elementsArray.push(createProjectLabel());
-    elementsArray.push(createPriorityLabel);
+    elementsArray.push(createPriorityLabel());
     elementsArray.push(createDescriptionLabel());
 
     return elementsArray;
@@ -28,7 +28,7 @@ function createNoteDisplay(){
     elementsArray.push(createTitleLabel());
     elementsArray.push(createFechaLabel());
     elementsArray.push(createProjectLabel());
-    elementsArray.push(createPriorityLabel);
+    elementsArray.push(createPriorityLabel());
     elementsArray.push(createDescriptionLabel());
 
     return elementsArray;
@@ -113,7 +113,7 @@ function createToolTip(title,content){
 function createPriorityLabel(){
     const label = document.createElement("label");
     label.setAttribute("for","createPriority");
-    label.classList.add("topLabel");
+    label.classList.add("sideLabel");
 
     const createSelect = ()=>{
         const select = document.createElement("select");
@@ -151,7 +151,7 @@ function createDescriptionLabel(){
         input.setAttribute("placeholder","Agregar descripcion");
         return input;
     }
-    label.appendChild(createTextInput);
+    label.appendChild(createTextInput());
     return label;
 }
 
