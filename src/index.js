@@ -13,6 +13,7 @@ const completedProjectsContainer = document.getElementById("completedContainer")
 const taskTypeBtn = document.getElementById("selectType");
 const modalForm = document.getElementById("createHeader");
 const saveChangesBtn = document.getElementById("saveChanges");
+const categoriesList = document.getElementById("proyectosContainer");
 
 let currentProject = "projecto1";
 let projectsCategories = getCurrentProjects(testArray);
@@ -70,7 +71,18 @@ function getCurrentProjects(objetsArray){
 }
 
 function addNewCategory(project){
-    if(projectsCategories.indexOf(project)>0){
+    if(projectsCategories.indexOf(project)<0){
         projectsCategories.push(project);
+        updateProjects();
     }
+}
+
+function updateProjects(){
+    categoriesList.replaceChildren();
+    console.log(projectsCategories);
+    projectsCategories.forEach(project=>{
+        let pElement = document.createElement("p");
+        pElement.textContent = project;
+        categoriesList.appendChild(pElement);
+    })
 }
