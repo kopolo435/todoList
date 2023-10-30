@@ -16,11 +16,15 @@ const saveChangesBtn = document.getElementById("saveChanges");
 const categoriesList = document.getElementById("proyectosContainer");
 const projectTitle = document.getElementById("projectTItle");
 
-let currentProject = "projecto1";
+let currentProject = "Default";
+projectTitle.textContent = currentProject;
 let projectsCategories = getCurrentProjects(testArray);
 let projectsArray = testArray;
 function updateShownProjects(){
-    let currentProjectArray = projectsArray.filter(task => task.project === currentProject)
+    let currentProjectArray = projectsArray;
+    if(currentProject != "Default"){
+        currentProjectArray = projectsArray.filter(task => task.project === currentProject)
+    }
     projectsContainer.replaceChildren();
     completedProjectsContainer.replaceChildren();
     currentProjectArray.forEach((taskObj,index) => {
@@ -123,6 +127,10 @@ function addNewCategory(project){
 
 function updateProjects(){
     categoriesList.replaceChildren();
+    let defaultP = document.createElement("p");
+    defaultP.textContent = "Default";
+    defaultP.addEventListener("click",changeCurrentProject);
+    categoriesList.appendChild(defaultP);
     projectsCategories.forEach(project=>{
         let pElement = document.createElement("p");
         pElement.textContent = project;
