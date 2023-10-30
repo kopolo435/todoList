@@ -129,14 +129,12 @@ function updateProjects(){
         pElement.addEventListener("click",changeCurrentProject);
         categoriesList.appendChild(pElement);
     })
-
-    function changeCurrentProject(event){
-        currentProject = event.target.textContent;
-        console.log(event.target.textContent);
-        event.target.classList.add("currentProject");
-        projectTitle.textContent = event.target.textContent;
-        updateShownProjects();
-    }
+}
+function changeCurrentProject(event){
+    currentProject = event.target.textContent;
+    event.target.classList.add("currentProject");
+    projectTitle.textContent = event.target.textContent;
+    updateShownProjects();
 }
 
 function cleanAddTaskDisplay(){
