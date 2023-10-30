@@ -14,6 +14,7 @@ const taskTypeBtn = document.getElementById("selectType");
 const modalForm = document.getElementById("createHeader");
 const saveChangesBtn = document.getElementById("saveChanges");
 const categoriesList = document.getElementById("proyectosContainer");
+const projectTitle = document.getElementById("projectTItle");
 
 let currentProject = "projecto1";
 let projectsCategories = getCurrentProjects(testArray);
@@ -32,7 +33,7 @@ function updateShownProjects(){
     });
 }
 updateShownProjects();
-
+updateProjects();
 taskTypeBtn.addEventListener("change",e =>{
     let elementsArray = addTaskDisplay(e.target.value);
     modalForm.replaceChildren();
@@ -122,12 +123,20 @@ function addNewCategory(project){
 
 function updateProjects(){
     categoriesList.replaceChildren();
-    console.log(projectsCategories);
     projectsCategories.forEach(project=>{
         let pElement = document.createElement("p");
         pElement.textContent = project;
+        pElement.addEventListener("click",changeCurrentProject);
         categoriesList.appendChild(pElement);
     })
+
+    function changeCurrentProject(event){
+        currentProject = event.target.textContent;
+        console.log(event.target.textContent);
+        event.target.classList.add("currentProject");
+        projectTitle.textContent = event.target.textContent;
+        updateShownProjects();
+    }
 }
 
 function cleanAddTaskDisplay(){
