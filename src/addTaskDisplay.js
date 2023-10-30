@@ -26,7 +26,6 @@ function createNoteDisplay(){
     let elementsArray = [];
     
     elementsArray.push(createTitleLabel());
-    elementsArray.push(createFechaLabel());
     elementsArray.push(createProjectLabel());
     elementsArray.push(createPriorityLabel());
     elementsArray.push(createDescriptionLabel());
