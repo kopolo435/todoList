@@ -48,6 +48,7 @@ saveChangesBtn.addEventListener("click", e=>{
         currentProject = objArray[1];
         addNewCategory(objArray[1]);
         updateShownProjects();
+        cleanAddTaskDisplay();
     }
 })
 
@@ -84,5 +85,13 @@ function updateProjects(){
         let pElement = document.createElement("p");
         pElement.textContent = project;
         categoriesList.appendChild(pElement);
+    })
+}
+
+function cleanAddTaskDisplay(){
+    let elementsArray = addTaskDisplay(taskTypeBtn.value);
+    modalForm.replaceChildren();
+    elementsArray.forEach(item =>{
+        modalForm.appendChild(item);
     })
 }
