@@ -79,6 +79,32 @@ function callCreateNote(){
     return returnArray;
 }
 
+function callCreateChecklist(){
+    let title = document.getElementById("createTitle");
+    let fecha = document.getElementById("createFecha");;
+    let project = document.getElementById("createProject");
+    let priority = document.getElementById("createPriority");
+    let checksObjArray = getChecksData();
+    console.log(checksObjArray);
+    let checklistObj = checkList.createCheckList(title.value,checksObjArray,new Date(fecha.value),priority.value,project.value);
+    let returnArray =[checklistObj,project.value];
+    console.log(returnArray);
+    return returnArray ;
+}
+
+function getChecksData(){
+    const checkNodelist = document.getElementsByClassName("createCheck");
+    let checkStringArray = []
+    let checkObjArray = []
+    Array.from(checkNodelist, check =>{
+        if(check.value != ""){
+            checkStringArray.push(check.value);
+        }
+    })
+    checkObjArray = checkList.createChecksArray(checkStringArray);
+    return checkObjArray;
+}
+
 function getCurrentProjects(objetsArray){
     let projects = objetsArray.map(item => item.project)
     const uniqueProjects = (value, index, array)=>{
