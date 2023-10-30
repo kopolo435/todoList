@@ -42,14 +42,19 @@ taskTypeBtn.addEventListener("change",e =>{
 })
 
 saveChangesBtn.addEventListener("click", e=>{
+    let objArray;
     if(taskTypeBtn.value === "todo"){
-        let objArray = callCreateTodo()
-        projectsArray.push(objArray[0]);
-        currentProject = objArray[1];
-        addNewCategory(objArray[1]);
-        updateShownProjects();
-        cleanAddTaskDisplay();
+        objArray = callCreateTodo();
+    }else if(taskTypeBtn.value === "note"){
+        objArray = callCreateNote();
+    }else if(taskTypeBtn.value === "checklist"){
+        objArray = callCreateChecklist();
     }
+    projectsArray.push(objArray[0]);
+    currentProject = objArray[1];
+    addNewCategory(objArray[1]);
+    updateShownProjects();
+    cleanAddTaskDisplay();
 })
 
 function callCreateTodo(){
