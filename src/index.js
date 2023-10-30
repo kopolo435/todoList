@@ -68,6 +68,17 @@ function callCreateTodo(){
     return returnArray;
 }
 
+function callCreateNote(){
+    let title = document.getElementById("createTitle");
+    let fecha = new Date();
+    let project = document.getElementById("createProject");
+    let priority = document.getElementById("createPriority");
+    let description = document.getElementById("createInfo");
+    let todoObj = createNote(title.value,description.value,fecha,priority.value,project.value);
+    let returnArray = [todoObj,todoObj.project];
+    return returnArray;
+}
+
 function getCurrentProjects(objetsArray){
     let projects = objetsArray.map(item => item.project)
     const uniqueProjects = (value, index, array)=>{
