@@ -90,12 +90,21 @@ function createObject(object){
             new Date(object.dueDate),object.status,object.priority,object.project)
             );
     } else if(object.type ==="checkList"){
-        return (checkList.createCheckList(object.title,object.checkList,new Date(object.dueDate),
+        let checkListChecks = createChecks(object.checkList);
+        return (checkList.createCheckList(object.title,checkListChecks,new Date(object.dueDate),
             object.priority,object.project));
     }else if(object.type ==="note"){
         return (createNote(object.title,object.noteText,new Date(lastModifiedDate),
             object.priority));
     }
+}
+
+function createChecks(checkObjs){
+    let checkArray = []
+    checkObjs.forEach(check =>{
+        checkArray.push(checkList.createCheck(check.title,check.status));
+    })
+    return checkArray;
 }
 
 export {getStoredCategories,getStoredTasks,storeData};
