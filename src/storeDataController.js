@@ -1,3 +1,6 @@
+import createTodo from "./todoObject.js";
+import * as checkList from "./checkListObject.js";
+import createNote from "./noteObject.js";
 function getStoredTasks(){
     if (storageAvailable("localStorage")) {
         if (!localStorage.getItem("categories")) {
@@ -22,6 +25,7 @@ function getStoredCategories(){
     if (storageAvailable("localStorage")) {
         if (!localStorage.getItem("categories")) {
             populateStorage();
+            return JSON.parse(localStorage.getItem("categories"))
           } else {
             return JSON.parse(localStorage.getItem("categories"));
           }
@@ -72,7 +76,7 @@ function getTasks(){
 }
 
 /*Almacena en el local storage toda la informacion guardada en la sesion*/
-function storeTasks(tasksArray,categoriesArray){
+function storeData(tasksArray,categoriesArray){
     if (storageAvailable("localStorage")) {
         localStorage.setItem("taskList",JSON.stringify(tasksArray));
         localStorage.setItem("categories",JSON.stringify(categoriesArray));
@@ -83,13 +87,15 @@ function storeTasks(tasksArray,categoriesArray){
 function createObject(object){
     if(object.type === "todo"){
         return (createTodo(object.title,object.description,
-            object.dueDate,object.status,object.priority,object.project)
+            new Date(object.dueDate),object.status,object.priority,object.project)
             );
     } else if(object.type ==="checkList"){
-        return (checkList.createCheckList(object.title,object.checkList,object.dueDate,
+        return (checkList.createCheckList(object.title,object.checkList,new Date(object.dueDate),
             object.priority,object.project));
     }else if(object.type ==="note"){
-        return (createNote(object.title,object.noteText,object.lastModifiedDate,
+        return (createNote(object.title,object.noteText,new Date(lastModifiedDate),
             object.priority));
     }
 }
+
+export {getStoredCategories,getStoredTasks,storeData};
