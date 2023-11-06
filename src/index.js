@@ -6,6 +6,7 @@ import style from "./style.css";
 import testArray from "../testInput.js"
 import createElement from './displayController.js'
 import addTaskDisplay from './addTaskDisplay.js'
+import * as storage from './storeDataController.js'
 
 const addBtn = document.getElementById("addBtn");
 const projectsContainer = document.getElementById("todoContainer");
@@ -17,10 +18,19 @@ const categoriesList = document.getElementById("proyectosContainer");
 const projectTitle = document.getElementById("projectTItle");
 
 let currentProject = "Default";
-projectTitle.textContent = currentProject;
-let projectsCategories = getCurrentProjects(testArray);
-projectsCategories.unshift("Default");
-let projectsArray = testArray;
+ projectTitle.textContent = currentProject;
+// let projectsCategories = getCurrentProjects(testArray);
+// projectsCategories.unshift("Default");
+// let projectsArray = testArray;
+let projectsCategories = storage.getStoredCategories();
+let projectsArray = storage.getStoredTasks();
+
+updateShownProjects();
+updateProjects()
+if(projectsArray.length >0){
+    updateShownProjects();
+}
+
 function updateShownProjects(){
     let currentProjectArray = projectsArray;
     if(currentProject != "Default"){
@@ -39,8 +49,7 @@ function updateShownProjects(){
         completedProjectsContainer.appendChild(createElement(taskObj,index));
     })
 }
-updateShownProjects();
-updateProjects();
+
 taskTypeBtn.addEventListener("change",e =>{
     let elementsArray = addTaskDisplay(e.target.value);
     modalForm.replaceChildren();
@@ -69,7 +78,7 @@ function callCreateTodo(){
     let title = document.getElementById("createTitle");
     let fecha = document.getElementById("createFecha");
     let project = document.getElementById("createProject");
-    let tempProject = isProjectDefault(project) ? "Default" : project.value;
+    let tempProject = isProjectDefault(project.value) ? "Default" : project.value;
     let priority = document.getElementById("createPriority");
     let description = document.getElementById("createInfo");
     let todoObj = createTodo(title.value,description.value,new Date(fecha.value),priority.value,tempProject);
@@ -81,7 +90,7 @@ function callCreateNote(){
     let title = document.getElementById("createTitle");
     let fecha = new Date();
     let project = document.getElementById("createProject");
-    let tempProject = isProjectDefault(project) ? "Default" : project.value;
+    let tempProject = isProjectDefault(project.value) ? "Default" : project.value;
     let priority = document.getElementById("createPriority");
     let description = document.getElementById("createInfo");
     let todoObj = createNote(title.value,description.value,fecha,priority.value,tempProject);
@@ -93,7 +102,7 @@ function callCreateChecklist(){
     let title = document.getElementById("createTitle");
     let fecha = document.getElementById("createFecha");;
     let project = document.getElementById("createProject");
-    let tempProject = isProjectDefault(project) ? "Default" : project.value;
+    let tempProject = isProjectDefault(project.value) ? "Default" : project.value;
     let priority = document.getElementById("createPriority");
     let checksObjArray = getChecksData();
     let checklistObj = checkList.createCheckList(title.value,checksObjArray,new Date(fecha.value),priority.value,tempProject);
