@@ -16,7 +16,7 @@ function createElement(todoObj,id){
 
 //Crea el display de un objeto de type "todo"
 function createTodoDisplay(todoObj,id){
-    let todoDisplay = document.createElement("div");
+    let todoDisplay = document.createElement("button");
     let classColor = getPriorityColor(todoObj.priority);
     todoDisplay.classList.add("todo",classColor);
     todoDisplay.setAttribute("data-id",id);
@@ -100,21 +100,21 @@ function getPriorityColor(priority){
 
 /*Crea el elemento html para display de un note */
 function createNoteDisplay(todoObj,id){
-    let todoDisplay = document.createElement("div");
+    let todoDisplay = document.createElement("button");
     let classColor = getPriorityColor(todoObj.priority);
     todoDisplay.classList.add("note",classColor);
     todoDisplay.setAttribute("data-id",id);
 
     todoDisplay.appendChild(createTodoCheckBtn(todoObj.status));
     todoDisplay.appendChild(createTodoTop(todoObj.title,todoObj.getFormatedDate(),todoObj.project));
-    todoDisplay.appendChild(createTodoDescription(todoObj.description));
+    todoDisplay.appendChild(createTodoDescription(todoObj.noteText));
 
     return todoDisplay;
 }
 
 /*Crea el elemento html para un checklist*/
 function createCheckListDisplay(todoObj,id){
-    let checklistDisplay = document.createElement("div");
+    let checklistDisplay = document.createElement("button");
     let classColor = getPriorityColor(todoObj.priority);
     checklistDisplay.classList.add("checkList",classColor);
     checklistDisplay.setAttribute("data-id",id);
