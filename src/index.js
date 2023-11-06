@@ -19,6 +19,7 @@ const projectTitle = document.getElementById("projectTItle");
 let currentProject = "Default";
 projectTitle.textContent = currentProject;
 let projectsCategories = getCurrentProjects(testArray);
+projectsCategories.unshift("Default");
 let projectsArray = testArray;
 function updateShownProjects(){
     let currentProjectArray = projectsArray;
@@ -56,7 +57,7 @@ saveChangesBtn.addEventListener("click", e=>{
         objArray = callCreateChecklist();
     }
     projectsArray.push(objArray[0]);
-    currentProject = objArray[1];
+    currentProject = isProjectDefault(objArray[1]) ? "Default" : objArray[1];
     addNewCategory(objArray[1]);
     updateShownProjects();
     cleanAddTaskDisplay();
@@ -66,9 +67,10 @@ function callCreateTodo(){
     let title = document.getElementById("createTitle");
     let fecha = document.getElementById("createFecha");
     let project = document.getElementById("createProject");
+    let tempProject = isProjectDefault(project) ? "Default" : project.value;
     let priority = document.getElementById("createPriority");
     let description = document.getElementById("createInfo");
-    let todoObj = createTodo(title.value,description.value,new Date(fecha.value),priority.value,project.value);
+    let todoObj = createTodo(title.value,description.value,new Date(fecha.value),priority.value,tempProject);
     let returnArray = [todoObj,todoObj.project];
     return returnArray;
 }
@@ -77,9 +79,10 @@ function callCreateNote(){
     let title = document.getElementById("createTitle");
     let fecha = new Date();
     let project = document.getElementById("createProject");
+    let tempProject = isProjectDefault(project) ? "Default" : project.value;
     let priority = document.getElementById("createPriority");
     let description = document.getElementById("createInfo");
-    let todoObj = createNote(title.value,description.value,fecha,priority.value,project.value);
+    let todoObj = createNote(title.value,description.value,fecha,priority.value,tempProject);
     let returnArray = [todoObj,todoObj.project];
     return returnArray;
 }
@@ -133,10 +136,6 @@ function addNewCategory(project){
 
 function updateProjects(){
     categoriesList.replaceChildren();
-    let defaultP = document.createElement("p");
-    defaultP.textContent = "Default";
-    defaultP.addEventListener("click",changeCurrentProject);
-    categoriesList.appendChild(defaultP);
     projectsCategories.forEach(project=>{
         let pElement = document.createElement("p");
         pElement.textContent = project;
