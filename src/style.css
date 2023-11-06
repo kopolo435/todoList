@@ -316,3 +316,21 @@ label p{
     color: white;
     flex: 1;
 }
+
+/*Clases para cambiar backgroundColor segun prioridad*/
+
+.bg-priority1{
+    background-color: var(--priority-first);
+}
+.bg-priority2{
+    background-color: var(--priority-second);
+}
+.bg-priority3{
+    background-color: var(--priority-third);
+}
+.bg-priority4{
+    background-color: var(--priority-fourth);
+}
+.bg-priority5{
+    background-color: var(--priority-default);
+}
