@@ -94,7 +94,7 @@ function createObject(object){
         return (checkList.createCheckList(object.title,checkListChecks,new Date(object.dueDate),
             object.priority,object.project));
     }else if(object.type ==="note"){
-        return (createNote(object.title,object.noteText,new Date(lastModifiedDate),
+        return (createNote(object.title,object.noteText,new Date(object.lastModifiedDate),
             object.priority));
     }
 }
