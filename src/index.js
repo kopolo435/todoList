@@ -88,13 +88,19 @@ function callCreateChecklist(){
     let title = document.getElementById("createTitle");
     let fecha = document.getElementById("createFecha");;
     let project = document.getElementById("createProject");
+    let tempProject = isProjectDefault(project) ? "Default" : project.value;
     let priority = document.getElementById("createPriority");
     let checksObjArray = getChecksData();
-    console.log(checksObjArray);
-    let checklistObj = checkList.createCheckList(title.value,checksObjArray,new Date(fecha.value),priority.value,project.value);
+    let checklistObj = checkList.createCheckList(title.value,checksObjArray,new Date(fecha.value),priority.value,tempProject);
     let returnArray =[checklistObj,project.value];
-    console.log(returnArray);
     return returnArray ;
+}
+
+function isProjectDefault(project){
+    if (!project.length){
+        return true
+    }
+    else return false;
 }
 
 function getChecksData(){
