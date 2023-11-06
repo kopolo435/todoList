@@ -28,38 +28,40 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="createHeader">
-                    <label for="createTitle" class="topLabel">
-                        Nombre tarea
-                        <input type="text" name="title" id="createTitle" placeholder="Nombre tarea">
-                    </label>
-                    <label for="createFecha" class="sideLabel">
-                        Fecha limite
-                        <input type="date" name="fecha" id="createFecha">
-                    </label>
-                    <label for="createProject" class="topLabel">
-                        <p data-bs-toggle="tooltip"  title="Grupo donde se guardara la tarea">Proyecto</p>
-                        <input type="text" name="project" id="createProject" placeholder="Default">
-                    </label>
-                    <label for="createPriority" class="sideLabel">
-                        <p data-bs-toggle="tooltip"  title="La prioridad 1 es la mas alta">Prioridad</p>
-                        <select name="priority" id="createPriority">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5" selected>5</option>
-                        </select>
-                    </label>
-                    <label for="createInfo" class="topLabel">
-                        Descripcion
-                        <textarea name="info" id="createInfo" cols="30" rows="5" placeholder="Agregar descripcion"></textarea>
-                    </label>
-                </div>
+                <form id="addTask"action="">
+                    <div id="createHeader">
+                        <label for="createTitle" class="topLabel">
+                            Nombre tarea
+                            <input type="text" name="title" id="createTitle" placeholder="Nombre tarea">
+                        </label>
+                        <label for="createFecha" class="sideLabel">
+                            Fecha limite
+                            <input type="date" name="fecha" id="createFecha" required>
+                        </label>
+                        <label for="createProject" class="topLabel">
+                            <p data-bs-toggle="tooltip"  title="Grupo donde se guardara la tarea">Proyecto</p>
+                            <input type="text" name="project" id="createProject" placeholder="Default">
+                        </label>
+                        <label for="createPriority" class="sideLabel">
+                            <p data-bs-toggle="tooltip"  title="La prioridad 1 es la mas alta">Prioridad</p>
+                            <select name="priority" id="createPriority">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                            </select>
+                        </label>
+                        <label for="createInfo" class="topLabel">
+                            Descripcion
+                            <textarea name="info" id="createInfo" cols="30" rows="5" placeholder="Agregar descripcion"></textarea>
+                        </label>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="submit" form="addTask" class="btn btn-primary" id="saveChanges">Save changes</button>
             </div>
         </div>
         </div>

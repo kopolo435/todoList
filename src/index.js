@@ -21,11 +21,10 @@ let currentProject = "Default";
  projectTitle.textContent = currentProject;
 // let projectsCategories = getCurrentProjects(testArray);
 // projectsCategories.unshift("Default");
-// let projectsArray = testArray;
+
 let projectsCategories = storage.getStoredCategories();
 let projectsArray = storage.getStoredTasks();
 
-updateShownProjects();
 updateProjects()
 if(projectsArray.length >0){
     updateShownProjects();
@@ -58,8 +57,11 @@ taskTypeBtn.addEventListener("change",e =>{
     })
 })
 
-saveChangesBtn.addEventListener("click", e=>{
+let form = document.getElementById("addTask");
+
+form.addEventListener("submit",e=>{
     let objArray;
+    e.preventDefault()
     if(taskTypeBtn.value === "todo"){
         objArray = callCreateTodo();
     }else if(taskTypeBtn.value === "note"){
@@ -71,6 +73,7 @@ saveChangesBtn.addEventListener("click", e=>{
     currentProject = isProjectDefault(objArray[1]) ? "Default" : objArray[1];
     addNewCategory(objArray[1]);
     updateShownProjects();
+    storage.storeData(projectsArray,projectsCategories)
     cleanAddTaskDisplay();
 })
 

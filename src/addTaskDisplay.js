@@ -75,6 +75,7 @@ function createFechaLabel(){
         fecha.setAttribute("type","date");
         fecha.setAttribute("name","fecha");
         fecha.setAttribute("id","createFecha");
+        fecha.required = true;
         return fecha
     }
     label.appendChild(createFecha());
