@@ -1,16 +1,36 @@
-function getStoredObjects(){
+function getStoredTasks(){
     if (storageAvailable("localStorage")) {
         if (!localStorage.getItem("categories")) {
             populateStorage();
           } else {
-            return getObjects();
+            return getTasks();
           }
       } else {
-        // Se retorna [] para que la apliacion funcione, aunque no se podra guardar nada.
+        // Se retorna [] para que la aplicacion funcione, aunque no se podra guardar nada.
         return []
       }
       
 }
+
+/*Agrega categoria inicial cuando se usa por primera vez*/
+function populateStorage(){
+    localStorage.setItem("taskList",JSON.stringify([]));
+    localStorage.setItem("categories",JSON.stringify(["Default"]));
+}
+
+function getStoredCategories(){
+    if (storageAvailable("localStorage")) {
+        if (!localStorage.getItem("categories")) {
+            populateStorage();
+          } else {
+            return JSON.parse(localStorage.getItem("categories"));
+          }
+      } else {
+        // Se retorna [] para que la aplicacion funcione, aunque no se podra guardar nada.
+        return []
+      }
+}
+
 
 
 /*Comprueba si localstorage esta soportado y disponible en el browser*/
@@ -40,8 +60,26 @@ function storageAvailable(type) {
       );
     }
   }
-  
 
+/*Retorna array con objetos con data y metodos listo para usarse*/
+function getTasks(){
+    let tasksDataListArray = JSON.parse(localStorage.getItem("taskList"));
+    let tasksObjectsList = [];
+    tasksDataListArray.forEach(task => {
+        tasksObjectsList.push(createObject(task));
+    });
+    return tasksObjectsList;
+}
+
+/*Almacena en el local storage toda la informacion guardada en la sesion*/
+function storeTasks(tasksArray,categoriesArray){
+    if (storageAvailable("localStorage")) {
+        localStorage.setItem("taskList",JSON.stringify(tasksArray));
+        localStorage.setItem("categories",JSON.stringify(categoriesArray));
+    } 
+}
+  
+/*Crea los objetos con la informacion dada para añadirle los metodos*/
 function createObject(object){
     if(object.type === "todo"){
         return (createTodo(object.title,object.description,
