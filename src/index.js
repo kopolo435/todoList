@@ -26,16 +26,18 @@ function updateShownProjects(){
     if(currentProject != "Default"){
         currentProjectArray = projectsArray.filter(task => task.project === currentProject)
     }
+    let unfinishedArray = todoObjectsController.getUnfinishedTodoList(currentProjectArray);
+    let completedArray= todoObjectsController.getCompletedTodoList(currentProjectArray);
     projectsContainer.replaceChildren();
     completedProjectsContainer.replaceChildren();
-    currentProjectArray.forEach((taskObj,index) => {
-        if(!taskObj.status){
-            projectsContainer.appendChild(createElement(taskObj,index));
-        }
-        else{
-            completedProjectsContainer.appendChild(createElement(taskObj,index));
-        }
+
+    unfinishedArray.forEach((taskObj,index) => {
+        projectsContainer.appendChild(createElement(taskObj,index));
     });
+
+    completedArray.forEach((taskObj,index)=>{
+        completedProjectsContainer.appendChild(createElement(taskObj,index));
+    })
 }
 updateShownProjects();
 updateProjects();
