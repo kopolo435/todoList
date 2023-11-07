@@ -61,4 +61,5 @@ export {getCompletedTodoList,
     deleteTodoObject,
     moveUpTodoObject,
     moveDownTodoObject,
-    replaceTodoObject};
+    replaceTodoObject,
+    sortTodoListPriority};
