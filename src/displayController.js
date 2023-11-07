@@ -18,8 +18,10 @@ function createElement(todoObj,id){
 function createTodoDisplay(todoObj,id){
     let todoDisplay = document.createElement("button");
     let classColor = getPriorityColor(todoObj.priority);
-    todoDisplay.classList.add("todo",classColor);
+    todoDisplay.classList.add("todo",classColor,"btn");
     todoDisplay.setAttribute("data-id",id);
+    todoDisplay.setAttribute("data-bs-toggle","modal");
+    todoDisplay.setAttribute("data-bs-target","#updateModal");
 
     todoDisplay.appendChild(createTodoCheckBtn(todoObj.status));
     todoDisplay.appendChild(createTodoTop(todoObj.title,todoObj.getFormatedDate(),todoObj.project));
@@ -102,8 +104,10 @@ function getPriorityColor(priority){
 function createNoteDisplay(todoObj,id){
     let todoDisplay = document.createElement("button");
     let classColor = getPriorityColor(todoObj.priority);
-    todoDisplay.classList.add("note",classColor);
+    todoDisplay.classList.add("note",classColor,"btn");
     todoDisplay.setAttribute("data-id",id);
+    todoDisplay.setAttribute("data-bs-toggle","modal");
+    todoDisplay.setAttribute("data-bs-target","#updateModal");
 
     todoDisplay.appendChild(createTodoCheckBtn(todoObj.status));
     todoDisplay.appendChild(createTodoTop(todoObj.title,todoObj.getFormatedDate(),todoObj.project));
@@ -116,9 +120,10 @@ function createNoteDisplay(todoObj,id){
 function createCheckListDisplay(todoObj,id){
     let checklistDisplay = document.createElement("button");
     let classColor = getPriorityColor(todoObj.priority);
-    checklistDisplay.classList.add("checkList",classColor);
+    checklistDisplay.classList.add("checkList",classColor,"btn");
     checklistDisplay.setAttribute("data-id",id);
-
+    checklistDisplay.setAttribute("data-bs-toggle","modal");
+    checklistDisplay.setAttribute("data-bs-target","#updateModal");
     
     checklistDisplay.appendChild(createTodoTop(todoObj.title,todoObj.getFormatedDate(),todoObj.project));
     checklistDisplay.appendChild(createChecksContainer(todoObj.checkList));
