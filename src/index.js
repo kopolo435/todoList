@@ -7,6 +7,7 @@ import testArray from "../testInput.js"
 import createElement from './displayController.js'
 import addTaskDisplay from './addTaskDisplay.js'
 import * as storage from './storeDataController.js'
+import changeModalDisplay from "./updateTaskDisplay.js";
 
 const addBtn = document.getElementById("addBtn");
 const projectsContainer = document.getElementById("todoContainer");
@@ -16,6 +17,8 @@ const modalForm = document.getElementById("createHeader");
 const saveChangesBtn = document.getElementById("saveChanges");
 const categoriesList = document.getElementById("proyectosContainer");
 const projectTitle = document.getElementById("projectTItle");
+const modal = document.getElementById("exampleModal");
+let taskId;
 
 let currentProject = "Default";
  projectTitle.textContent = currentProject;
@@ -41,11 +44,15 @@ function updateShownProjects(){
     completedProjectsContainer.replaceChildren();
 
     unfinishedArray.forEach((taskObj,index) => {
-        projectsContainer.appendChild(createElement(taskObj,index));
+        let taskCard = createElement(taskObj,index);
+        addUpdateEvent(taskCard);
+        projectsContainer.appendChild(taskCard);
     });
 
     completedArray.forEach((taskObj,index)=>{
-        completedProjectsContainer.appendChild(createElement(taskObj,index));
+        let taskCard = createElement(taskObj,index);
+        addUpdateEvent(taskCard);
+        completedProjectsContainer.appendChild(taskCard);
     })
 }
 
@@ -169,5 +176,14 @@ function cleanAddTaskDisplay(){
     modalForm.replaceChildren();
     elementsArray.forEach(item =>{
         modalForm.appendChild(item);
+    })
+}
+
+function addUpdateEvent(taskCard){
+    taskCard.addEventListener("click", e=>{
+        const task = e.target.closest("[data-id]");
+        taskId = task.dataset.id;
+        console.log(taskId);
+        changeModalDisplay(projectsArray[taskId],modal);
     })
 }
