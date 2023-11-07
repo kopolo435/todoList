@@ -66,6 +66,64 @@
         </div>
         </div>
     </div>
+
+        <!-- Modal de actualizar datos -->
+        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar tarea</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateTask"action="">
+                        <div id="createHeader">
+                            <label for="updateTitle" class="topLabel">
+                                Nombre tarea
+                                <input type="text" name="title" id="updateTitle" placeholder="Nombre tarea">
+                            </label>
+                            <label for="updateFecha" class="sideLabel">
+                                Fecha limite
+                                <input type="date" name="fecha" id="updateFecha" required>
+                            </label>
+                            <label for="updateProject" class="topLabel">
+                                <p data-bs-toggle="tooltip"  title="Grupo donde se guardara la tarea">Proyecto</p>
+                                <input type="text" name="project" id="updateProject" placeholder="Default">
+                            </label>
+                            <label for="updatePriority" class="sideLabel">
+                                <p data-bs-toggle="tooltip"  title="La prioridad 1 es la mas alta">Prioridad</p>
+                                <select name="priority" id="updatePriority">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <label for="updateStatus" class="selectChoice">
+                                Estado de la tarea
+                                <select name="" id="selectType" id="updateStatus">
+                                    <option value="false">Sin completar</option>
+                                    <option value="true" >Completada</option>
+                                </select>
+                            </label>
+                            <label for="updateInfo" id="descriptionLabel" class="topLabel">
+                                Descripcion
+                                <textarea name="info" id="updateInfo" cols="30" rows="5" placeholder="Agregar descripcion"></textarea>
+                            </label>
+                            <div id="updateCheckContainer">
+                                <p>Hola</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="updateTask" class="btn btn-primary" id="updateChanges">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
     <header>
         <img src="" alt="Logo Todo App">
         <p>Soy un header</p>
