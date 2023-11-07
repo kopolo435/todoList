@@ -18,6 +18,7 @@ const saveChangesBtn = document.getElementById("saveChanges");
 const categoriesList = document.getElementById("proyectosContainer");
 const projectTitle = document.getElementById("projectTItle");
 const modal = document.getElementById("exampleModal");
+const clickEvent = new Event("click");
 let taskId;
 
 let currentProject = "Default";
@@ -34,26 +35,38 @@ if(projectsArray.length >0){
 }
 
 function updateShownProjects(){
-    let currentProjectArray = projectsArray;
-    if(currentProject != "Default"){
-        currentProjectArray = projectsArray.filter(task => task.project === currentProject)
-    }
-    let unfinishedArray = todoObjectsController.getUnfinishedTodoList(currentProjectArray);
-    let completedArray= todoObjectsController.getCompletedTodoList(currentProjectArray);
+    projectsArray = todoObjectsController.sortTodoListPriority(projectsArray);
     projectsContainer.replaceChildren();
     completedProjectsContainer.replaceChildren();
 
-    unfinishedArray.forEach((taskObj,index) => {
-        let taskCard = createElement(taskObj,index);
-        addUpdateEvent(taskCard);
-        projectsContainer.appendChild(taskCard);
-    });
-
-    completedArray.forEach((taskObj,index)=>{
-        let taskCard = createElement(taskObj,index);
-        addUpdateEvent(taskCard);
-        completedProjectsContainer.appendChild(taskCard);
+    if(currentProject != "Default"){
+        projectsArray.forEach((taskObj,index) =>{
+            if(taskObj.project ===currentProject){
+                if(!taskObj.status){
+                    let taskCard = createElement(taskObj,index);
+                    addUpdateEvent(taskCard);
+                    projectsContainer.appendChild(taskCard);
+                }else{
+                    let taskCard = createElement(taskObj,index);
+                    addUpdateEvent(taskCard);
+                    completedProjectsContainer.appendChild(taskCard);
+                }
+            }
+        })
+    }
+    projectsArray.forEach((taskObj,index) =>{
+        if(!taskObj.status){
+            let taskCard = createElement(taskObj,index);
+            addUpdateEvent(taskCard);
+            projectsContainer.appendChild(taskCard);
+        }else{
+            let taskCard = createElement(taskObj,index);
+            addUpdateEvent(taskCard);
+            completedProjectsContainer.appendChild(taskCard);
+        }
     })
+
+
 }
 
 taskTypeBtn.addEventListener("change",e =>{
@@ -183,7 +196,6 @@ function addUpdateEvent(taskCard){
     taskCard.addEventListener("click", e=>{
         const task = e.target.closest("[data-id]");
         taskId = task.dataset.id;
-        console.log(taskId);
         changeModalDisplay(projectsArray[taskId],modal);
     })
 }
