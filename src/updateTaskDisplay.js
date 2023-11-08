@@ -65,9 +65,13 @@ function updateChecklistDisplay(checkObj,modal){
 function addChecksContainer(checkObj){
     const checkContainer = document.getElementById("updateCheckContainer");
     let checksArray = checkObj.checkList;
+    let endIndex;
+    checkContainer.replaceChildren();
     checksArray.forEach((check,index)=>{
         checkContainer.appendChild(createChecksLabel(check,index));
+        endIndex = index;
     })
+    checkContainer.appendChild(createLastChecksLabel(endIndex+1));
     return checkContainer
 }
 
@@ -80,7 +84,7 @@ function createChecksLabel(checkObj,position){
 
     const paragraph = document.createElement("p");
     paragraph.classList.add("checkLabel");
-    paragraph.textContent = "Check: "+(position+1);
+    paragraph.textContent = "Check "+(position+1)+": ";
 
     label.appendChild(paragraph);
     label.appendChild(createCheck(checkObj,position));
@@ -119,6 +123,42 @@ function checkIFShowDescription(taskObj){
         checkContainer.style.display="none";
         statusLabel.style.display="flex"
     }
+}
+
+//Funciones para crear el ultimo check input que permite añadir nuevos
+function createLastChecksLabel(position){
+    const label = document.createElement("label");
+    label.setAttribute("for","check"+position);
+    label.setAttribute("data-position",position);
+    label.classList.add("sideLabel");
+
+    const paragraph = document.createElement("p");
+    paragraph.classList.add("checkLabel");
+    paragraph.textContent = "Check "+(position+1)+": ";
+
+    label.appendChild(paragraph);
+    label.appendChild(createLastCheck(position));
+    return label
+
+}
+
+function createLastCheck(position){
+    const check = document.createElement("input");
+    check.setAttribute("type","text");
+    check.setAttribute("name","check"+position);
+    check.setAttribute("id","check"+position);
+    check.setAttribute("data-position",position)
+    check.classList.add("createCheck");
+
+    const addCheckEvent = function(e){
+        if(e.target.value.length >= 3){
+            const checkContainer = document.getElementById("updateCheckContainer");
+            checkContainer.appendChild(createLastChecksLabel(Number(e.target.getAttribute("data-position"))+1));
+            e.target.removeEventListener("keyup",addCheckEvent);
+        }
+    }
+    check.addEventListener("keyup",addCheckEvent);
+    return check;
 }
 
 export default changeModalDisplay ;
