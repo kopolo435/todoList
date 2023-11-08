@@ -38,12 +38,13 @@ const createTodo = (_title,_description,_dueDate,_priority,_project,_status=fals
         get status(){
             return _status;
         },
-        updateObject : (newTitle,newDescription,newDueDate,newPriority,newProject)=>{
+        updateObject : (newTitle,newDescription,newDueDate,newPriority,newProject,status)=>{
             _title = newTitle;
             _description = newDescription;
             _dueDate = newDueDate;
             _priority = newPriority;
             _project = newProject;
+            _status = status;
         },
         get type(){
              return type;
