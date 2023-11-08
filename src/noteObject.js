@@ -39,12 +39,13 @@ const createNote = (title,noteText,lastModifiedDate,priority,project,status=fals
         set project(newProject){
             project = newProject;
         },
-        updatenoteObject: function(newTitle,newNoteText,newModifiedDate,newPriority,newProject){
+        updatenoteObject: function(newTitle,newNoteText,newModifiedDate,newPriority,newProject,status){
             this.title = newTitle;
             this.noteText = newNoteText;
             this.lastModifiedDate = newModifiedDate;
             this.priority = newPriority;
             this.project = newProject;
+            this.status = status;
         },
         get type(){
             return type;
