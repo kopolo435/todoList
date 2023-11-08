@@ -65,6 +65,7 @@ function updateShownProjects(){
             }
         })
     }
+    addChangeStatusEvent();
 
 
 }
@@ -167,9 +168,23 @@ function cleanAddTaskDisplay(){
 
 function addUpdateEvent(taskCard){
     taskCard.addEventListener("click", e=>{
-        const task = e.target.closest("[data-id]");
-        taskId = task.dataset.id;
-        changeModalDisplay(projectsArray[taskId],modal);
+        if (!e.target.classList.contains("todoCheck")) {
+            const task = e.target.closest("[data-id]");
+            taskId = task.dataset.id;
+            changeModalDisplay(projectsArray[taskId], modal);
+        }
+    })
+}
+
+function addChangeStatusEvent(){
+    const checkBtnArray = document.getElementsByClassName("todoCheck");
+    Array.from(checkBtnArray).forEach(button =>{
+        button.addEventListener("click",e=>{
+            e.stopPropagation(); // Prevent propagation to the card
+            let index = e.target.closest("[data-id]").dataset.id;
+            projectsArray[index].changeStatus();
+            updateShownProjects();
+        })
     })
 }
 
