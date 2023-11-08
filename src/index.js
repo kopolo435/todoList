@@ -18,6 +18,7 @@ const modalForm = document.getElementById("createHeader");
 const saveChangesBtn = document.getElementById("saveChanges");
 const categoriesList = document.getElementById("proyectosContainer");
 const projectTitle = document.getElementById("projectTItle");
+const mobileProjectTitle = document.getElementById("currentProjectTitle");
 const modal = document.getElementById("exampleModal");
 const addTaskForm = document.getElementById("addTask");
 const updateTaskForm = document.getElementById("updateTask");
@@ -28,6 +29,7 @@ let projectsCategories = storage.getStoredCategories();
 let projectsArray = storage.getStoredTasks();
 
 projectTitle.textContent = currentProject;
+mobileProjectTitle.textContent = currentProject;
 
 
 function updateShownProjects(){
@@ -35,6 +37,7 @@ function updateShownProjects(){
     projectsContainer.replaceChildren();
     completedProjectsContainer.replaceChildren();
     projectTitle.textContent = currentProject;
+    mobileProjectTitle.textContent = currentProject;
     if(currentProject != "Default"){
         projectsArray.forEach((taskObj,index) =>{
             if(taskObj.project ===currentProject){
