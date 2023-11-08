@@ -33,14 +33,15 @@ function updateNoteDisplay(noteObj,moda){
     const project = document.getElementById("updateProject");
     const priority = document.getElementById("updatePriority");
     const description = document.getElementById("updateInfo");
+    const status = document.getElementById("updateStatus");
     checkIFShowDescription(noteObj);
-
 
     title.value = noteObj.title;
     fecha.value = format(noteObj.lastModifiedDate, "yyyy-MM-dd'");
     project.value = noteObj.project;
     priority.value = noteObj.priority;
     description.value = noteObj.noteText;
+    status.value = noteObj.status;
 }
 
 function updateChecklistDisplay(checkObj,modal){
