@@ -34,7 +34,7 @@ function updateShownProjects(){
     projectsArray = todoObjectsController.sortTodoListPriority(projectsArray);
     projectsContainer.replaceChildren();
     completedProjectsContainer.replaceChildren();
-
+    projectTitle.textContent = currentProject;
     if(currentProject != "Default"){
         projectsArray.forEach((taskObj,index) =>{
             if(taskObj.project ===currentProject){
