@@ -39,6 +39,9 @@ const createNote = (title,noteText,lastModifiedDate,priority,project,status=fals
         set project(newProject){
             project = newProject;
         },
+        set status(newStatus){
+            status = newStatus;
+        },
         updatenoteObject: function(newTitle,newNoteText,newModifiedDate,newPriority,newProject,status){
             this.title = newTitle;
             this.noteText = newNoteText;

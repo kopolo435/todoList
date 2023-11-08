@@ -87,6 +87,10 @@ updateTaskForm.addEventListener("submit",e=>{
             updateObject.dueDate,updateObject.priority,updateObject.project,updateObject.status);
     }else if(updateForm.getAttribute("data-type") === "note"){
         objArray = formUpdate.updateNote();
+        updateObject = objArray[0];
+        projectsArray[taskId].updatenoteObject(updateObject.title,updateObject.noteText,
+            updateObject.lastModifiedDate,updateObject.priority,updateObject.project,
+            updateObject.status);
     }else if(updateForm.getAttribute("data-type")=== "checklist"){
         objArray = formUpdate.updateChecklist();
     }
@@ -94,6 +98,7 @@ updateTaskForm.addEventListener("submit",e=>{
     addNewCategory(objArray[1]);
     updateShownProjects();
     storage.storeData(projectsArray,projectsCategories)
+    console.log(localStorage)
 })
 
 

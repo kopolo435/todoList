@@ -87,15 +87,15 @@ function storeData(tasksArray,categoriesArray){
 function createObject(object){
     if(object.type === "todo"){
         return (createTodo(object.title,object.description,
-            new Date(object.dueDate),object.status,object.priority,object.project)
+            new Date(object.dueDate),object.priority,object.project,object.status)
             );
     } else if(object.type ==="checkList"){
         let checkListChecks = createChecks(object.checkList);
         return (checkList.createCheckList(object.title,checkListChecks,new Date(object.dueDate),
-            object.priority,object.project));
+            object.priority,object.project,object.status));
     }else if(object.type ==="note"){
         return (createNote(object.title,object.noteText,new Date(object.lastModifiedDate),
-            object.priority));
+            object.priority,object.project,object.status));
     }
 }
 
