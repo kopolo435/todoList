@@ -303,7 +303,7 @@ label p{
     margin-left: 5px;
 }
 
-#createChecksContainer{
+#createChecksContainer,#updateCheckContainer{
     display: flex;
     flex-direction: column;
     gap: 5px;
