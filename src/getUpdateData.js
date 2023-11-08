@@ -36,7 +36,7 @@ function updateChecklist(){
     let status = document.getElementById("updateStatus")==="true" ? true : false; 
     let checksObjArray = getChecksData();
     let checklistObj = checkList.createCheckList(title,checksObjArray,new Date(fecha),priority,tempProject);
-    let returnArray =[checklistObj,project.value];
+    let returnArray =[checklistObj,project];
     return returnArray ;
 }
 

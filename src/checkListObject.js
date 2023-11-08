@@ -35,7 +35,7 @@ const createCheckList = (title,checkList,dueDate,priority,project,status=false)=
             return checkList;
         },
         set checkList(newCheckList){
-            checkList = createChecks(newCheckList);
+            checkList = newCheckList;
         },
         get dueDate(){
             return dueDate;

@@ -91,8 +91,12 @@ updateTaskForm.addEventListener("submit",e=>{
         projectsArray[taskId].updatenoteObject(updateObject.title,updateObject.noteText,
             updateObject.lastModifiedDate,updateObject.priority,updateObject.project,
             updateObject.status);
-    }else if(updateForm.getAttribute("data-type")=== "checklist"){
+    }else if(updateForm.getAttribute("data-type")=== "checkList"){
         objArray = formUpdate.updateChecklist();
+        updateObject = objArray[0];
+        projectsArray[taskId].updateCheckList(updateObject.title,updateObject.checkList,
+            updateObject.dueDate,updateObject.priority,updateObject.project,
+            updateObject.status);
     }
     currentProject = isProjectDefault(objArray[1]) ? "Default" : objArray[1];
     addNewCategory(objArray[1]);
