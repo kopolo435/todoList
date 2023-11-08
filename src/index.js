@@ -49,18 +49,19 @@ function updateShownProjects(){
                 }
             }
         })
+    }else{
+        projectsArray.forEach((taskObj,index) =>{
+            if(!taskObj.status){
+                let taskCard = createElement(taskObj,index);
+                addUpdateEvent(taskCard);
+                projectsContainer.appendChild(taskCard);
+            }else{
+                let taskCard = createElement(taskObj,index);
+                addUpdateEvent(taskCard);
+                completedProjectsContainer.appendChild(taskCard);
+            }
+        })
     }
-    projectsArray.forEach((taskObj,index) =>{
-        if(!taskObj.status){
-            let taskCard = createElement(taskObj,index);
-            addUpdateEvent(taskCard);
-            projectsContainer.appendChild(taskCard);
-        }else{
-            let taskCard = createElement(taskObj,index);
-            addUpdateEvent(taskCard);
-            completedProjectsContainer.appendChild(taskCard);
-        }
-    })
 
 
 }
