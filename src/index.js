@@ -2,8 +2,7 @@ import createTodo from "./todoObject.js";
 import * as todoObjectsController  from "./todoObjectsController.js";
 import createNote from "./noteObject.js";
 import * as checkList from "./checkListObject.js";
-import style from "./style.css";
-import testArray from "../testInput.js"
+import style from "./style.css"; //Se coloca para que el webpack cargue el css
 import createElement from './displayController.js'
 import addTaskDisplay from './addTaskDisplay.js'
 import * as storage from './storeDataController.js'
