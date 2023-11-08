@@ -8,6 +8,7 @@ import addTaskDisplay from './addTaskDisplay.js'
 import * as storage from './storeDataController.js'
 import changeModalDisplay from "./updateTaskDisplay.js";
 import * as taskData from "./getFormData.js";
+import * as formUpdate from "./getUpdateData.js";
 
 const addBtn = document.getElementById("addBtn");
 const projectsContainer = document.getElementById("todoContainer");
@@ -18,7 +19,8 @@ const saveChangesBtn = document.getElementById("saveChanges");
 const categoriesList = document.getElementById("proyectosContainer");
 const projectTitle = document.getElementById("projectTItle");
 const modal = document.getElementById("exampleModal");
-const form = document.getElementById("addTask");
+const addTaskForm = document.getElementById("addTask");
+const updateTaskForm = document.getElementById("updateTask");
 
 let taskId;
 let currentProject = "Default";
@@ -72,8 +74,29 @@ taskTypeBtn.addEventListener("change",e =>{
 })
 
 
+updateTaskForm.addEventListener("submit",e=>{
+    let updateForm = document.getElementById("updateTask");
+    let objArray;
+    let updateObject;
+    e.preventDefault()
+    if(updateForm.getAttribute("data-type") === "todo"){
+        objArray = formUpdate.updateTodo();
+        updateObject = objArray[0];
+        projectsArray[taskId].updateObject(updateObject.title,updateObject.description,
+            updateObject.dueDate,updateObject.priority,updateObject.project,updateObject.status);
+    }else if(updateForm.getAttribute("data-type") === "note"){
+        objArray = formUpdate.updateNote();
+    }else if(updateForm.getAttribute("data-type")=== "checklist"){
+        objArray = formUpdate.updateChecklist();
+    }
+    currentProject = isProjectDefault(objArray[1]) ? "Default" : objArray[1];
+    addNewCategory(objArray[1]);
+    updateShownProjects();
+    storage.storeData(projectsArray,projectsCategories)
+})
 
-form.addEventListener("submit",e=>{
+
+addTaskForm.addEventListener("submit",e=>{
     let objArray;
     e.preventDefault()
     if(taskTypeBtn.value === "todo"){
