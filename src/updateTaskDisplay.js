@@ -104,12 +104,15 @@ function createCheck(checkObj,position){
 function checkIFShowDescription(taskObj){
     const checkContainer = document.getElementById("updateCheckContainer");
     const descriptionContainer = document.getElementById("descriptionLabel");
+    const statusLabel = document.getElementById("statusLabel");
     if(taskObj.type === "checkList"){
         descriptionContainer.style.display="none";
         checkContainer.style.display="flex";
+        statusLabel.style.display="none";
     }else{
         descriptionContainer.style.display="flex";
         checkContainer.style.display="none";
+        statusLabel.style.display="flex"
     }
 }
 
