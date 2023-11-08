@@ -30,7 +30,7 @@ const createNote = (title,noteText,lastModifiedDate,priority,project,status=fals
         get status(){
             return status
         },
-        updateStatuts(){
+        changeStatus(){
             status = status ? false : true;
         },
         get project(){
