@@ -2,11 +2,15 @@ import format from 'date-fns/format/index.js'
 /*Recibe el objeto que se desea actualizar, utiliza la informacion de
 ese objeto para mostrar el modal con la informacion que se podra modificar*/
 function changeModalDisplay(taskObj,modal){
+    const updateForm = document.getElementById("updateTask");
     if(taskObj.type === "todo"){
+        updateForm.setAttribute("data-type","todo");
         updateTodoDisplay(taskObj,modal);
     }else if(taskObj.type ==="note"){
+        updateForm.setAttribute("data-type","note");
         updateNoteDisplay(taskObj,modal);
     }else{
+        updateForm.setAttribute("data-type","checkList");
         updateChecklistDisplay(taskObj,modal);
     }
 }
