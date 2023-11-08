@@ -19,21 +19,15 @@ const saveChangesBtn = document.getElementById("saveChanges");
 const categoriesList = document.getElementById("proyectosContainer");
 const projectTitle = document.getElementById("projectTItle");
 const modal = document.getElementById("exampleModal");
-const clickEvent = new Event("click");
+const form = document.getElementById("addTask");
+
 let taskId;
-
 let currentProject = "Default";
- projectTitle.textContent = currentProject;
-// let projectsCategories = getCurrentProjects(testArray);
-// projectsCategories.unshift("Default");
-
 let projectsCategories = storage.getStoredCategories();
 let projectsArray = storage.getStoredTasks();
 
-updateProjects()
-if(projectsArray.length >0){
-    updateShownProjects();
-}
+projectTitle.textContent = currentProject;
+
 
 function updateShownProjects(){
     projectsArray = todoObjectsController.sortTodoListPriority(projectsArray);
@@ -78,7 +72,7 @@ taskTypeBtn.addEventListener("change",e =>{
     })
 })
 
-let form = document.getElementById("addTask");
+
 
 form.addEventListener("submit",e=>{
     let objArray;
@@ -142,4 +136,9 @@ function addUpdateEvent(taskCard){
         taskId = task.dataset.id;
         changeModalDisplay(projectsArray[taskId],modal);
     })
+}
+
+updateProjects();
+if(projectsArray.length >0){
+    updateShownProjects();
 }
