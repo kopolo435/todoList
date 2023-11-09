@@ -4,8 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
-<script defer src="./runtime.bundle.js"></script><script defer src="./main.bundle.js"></script></head>
+    <link rel="stylesheet" href="style.css">
+
+    <!--Boostrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/35b83aded8.js" crossorigin="anonymous"></script>
+<script defer src="runtime.bundle.js"></script><script defer src="main.bundle.js"></script></head>
 <body>
-    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Crear tarea</h1>
+            <label for="selectType" class="selectChoice">
+                <select name="" id="selectType">
+                    <option value="todo">To do</option>
+                    <option value="note" >Note</option>
+                    <option value="checklist">checklist</option>
+                </select>
+            </label>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addTask"action="">
+                    <div id="createHeader">
+                        <label for="createTitle" class="topLabel">
+                            Nombre tarea
+                            <input type="text" name="title" id="createTitle" placeholder="Nombre tarea">
+                        </label>
+                        <label for="createFecha" class="sideLabel">
+                            Fecha limite
+                            <input type="date" name="fecha" id="createFecha" required>
+                        </label>
+                        <label for="createProject" class="topLabel">
+                            <p data-bs-toggle="tooltip"  title="Grupo donde se guardara la tarea">Proyecto</p>
+                            <input type="text" name="project" id="createProject" placeholder="Default">
+                        </label>
+                        <label for="createPriority" class="sideLabel">
+                            <p data-bs-toggle="tooltip"  title="La prioridad 1 es la mas alta">Prioridad</p>
+                            <select name="priority" id="createPriority">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                            </select>
+                        </label>
+                        <label for="createInfo" class="topLabel">
+                            Descripcion
+                            <textarea name="info" id="createInfo" cols="30" rows="5" placeholder="Agregar descripcion"></textarea>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" form="addTask" class="btn btn-primary" id="saveChanges">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+        <!-- Modal de actualizar datos -->
+        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar tarea</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateTask"action="">
+                        <div id="createHeader">
+                            <label for="updateTitle" class="topLabel">
+                                Nombre tarea
+                                <input type="text" name="title" id="updateTitle" placeholder="Nombre tarea">
+                            </label>
+                            <label for="updateFecha" class="sideLabel">
+                                Fecha limite
+                                <input type="date" name="fecha" id="updateFecha" required>
+                            </label>
+                            <label for="updateProject" class="topLabel">
+                                <p data-bs-toggle="tooltip"  title="Grupo donde se guardara la tarea">Proyecto</p>
+                                <input type="text" name="project" id="updateProject" placeholder="Default">
+                            </label>
+                            <label for="updatePriority" class="sideLabel">
+                                <p data-bs-toggle="tooltip"  title="La prioridad 1 es la mas alta">Prioridad</p>
+                                <select name="priority" id="updatePriority">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <label for="updateStatus" id="statusLabel" class="selectChoice">
+                                Estado de la tarea
+                                <select name="" id="updateStatus">
+                                    <option value="false">Sin completar</option>
+                                    <option value="true" >Completada</option>
+                                </select>
+                            </label>
+                            <label for="updateInfo" id="descriptionLabel" class="topLabel">
+                                Descripcion
+                                <textarea name="info" id="updateInfo" cols="30" rows="5" placeholder="Agregar descripcion"></textarea>
+                            </label>
+                            <div id="updateCheckContainer">
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" id="updateFooter">
+                    <div id="footerLeft">
+                        <button id="deleteTask" class="btn btn-danger">Borrar tarea</button>
+                    </div>
+                    <div id="footerRight">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" form="updateTask" class="btn btn-primary" id="updateChanges">Save changes</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    <header>
+        <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" transform="rotate(0)matrix(1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M6 15.8L7.14286 17L10 14" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 8.8L7.14286 10L10 7" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M13 9L18 9" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> <path d="M13 16L18 16" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+        <p id="headerText">Task Planner</p>
+    </header>
+    <main class="container-fluid row">
+        <aside id="projects" class="col- col-sm-3 col-lg-2 container-fluid">
+            <div id="asideTop">
+                <h2 id="asideTitle" class="d-sm-block">Lista de proyectos</h2>
+                <h2 id="currentProjectTitle" class="d-sm-none">Default</h2>
+                <button id="projectsBtn" class="btn d-sm-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#proyectosContainer" aria-expanded="false" aria-controls="proyectosContainer">
+                    <i class="fa-solid fa-caret-down fa-xl show"></i>
+                    <i class="fa-solid fa-caret-up fa-xl not-show"></i>
+                </button>
+            </div>
+            <div id="proyectosContainer" class="collapse d-sm-block">
+            </div>
+        </aside>
+        <div id="content" class="col container-fluid">
+            <h1 id="projectTItle" class="d-sm-block text-center">Titulo del proyecto</h1>
+            <div id="todoContainer">
+
+            </div>
+            <div id="btnContainer">
+                <button id="expandCompleted" class="collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#completedContainer" aria-expanded="false" aria-controls="completedContainer">
+                    Completados
+                    <i class="fa-solid fa-caret-down fa-xl show"></i>
+                    <i class="fa-solid fa-caret-up fa-xl not-show"></i>
+                </button>
+                <button id="addBtn" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus fa-2xl"></i></button>
+            </div>
+            <div id="completedContainer" class="collapse">
+                <div class="checkList">
+                    <div class="todoTop">
+                        <p>Titulo</p>
+                        <p class="taskDueDate">12/20/2023</p>
+                        <p class="taskProject d-sm-block">Default</p>
+                    </div>
+                    <div class="checksContainer">
+                        <div class="check">
+                            <button class="listCheckBtn">C</button>
+                            <p class="checkText">Check1</p>
+                        </div>
+                        <div class="check">
+                            <button class="listCheckBtn">C</button>
+                            <p class="checkText">Check2</p>
+                        </div>
+                        <div class="check">
+                            <button class="listCheckBtn ">C</button>
+                            <p class="checkText">Check3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer><a href="">@Kopolo435</a></footer>
 </body>
 </html>
