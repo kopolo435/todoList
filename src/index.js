@@ -22,6 +22,7 @@ const mobileProjectTitle = document.getElementById("currentProjectTitle");
 const modal = document.getElementById("exampleModal");
 const addTaskForm = document.getElementById("addTask");
 const updateTaskForm = document.getElementById("updateTask");
+const deleteBtn = document.getElementById("deleteTask");
 
 let taskId;
 let currentProject = "Default";
@@ -229,6 +230,12 @@ function completedCheckList(objIndex,checkListObj){
         updateShownProjects();
     }
 }
+
+deleteBtn.addEventListener("click",e=>{
+    projectsArray = todoObjectsController.deleteTodoObject(projectsArray,taskId);
+    updateShownProjects();
+    storage.storeData(projectsArray,projectsCategories)
+})
 
 updateProjects();
 if(projectsArray.length >0){
