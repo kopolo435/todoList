@@ -184,6 +184,11 @@ function addChangeStatusEvent(){
             let index = e.target.closest("[data-id]").dataset.id;
             projectsArray[index].changeStatus();
             updateShownProjects();
+            $('#updateModal').on('shown.bs.modal', function () {
+                // This code will run when the modal is fully shown and ready to be hidden
+                $('#updateModal').modal('hide');
+            });
+            
         })
     })
 }
