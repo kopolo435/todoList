@@ -189,7 +189,7 @@ function addChangeStatusEvent(){
                 // This code will run when the modal is fully shown and ready to be hidden
                 $('#updateModal').modal('hide');
             });
-            
+            storage.storeData(projectsArray,projectsCategories)
         })
     })
 }
@@ -214,7 +214,7 @@ function addChangeCheckStatus(){
                 // This code will run when the modal is fully shown and ready to be hidden
                 $('#updateModal').modal('hide');
             });
-            
+            storage.storeData(projectsArray,projectsCategories)
         })
     })
 }
