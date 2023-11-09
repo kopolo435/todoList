@@ -169,6 +169,7 @@ function cleanAddTaskDisplay(){
 function addUpdateEvent(taskCard){
     taskCard.addEventListener("click", e=>{
         if (!e.target.classList.contains("todoCheck")) {
+            e.stopPropagation(); // Prevent propagation to the card
             const task = e.target.closest("[data-id]");
             taskId = task.dataset.id;
             changeModalDisplay(projectsArray[taskId], modal);
