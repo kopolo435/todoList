@@ -66,7 +66,7 @@ function updateShownProjects(){
         })
     }
     addChangeStatusEvent();
-
+    addChangeCheckStatus();
 
 }
 
@@ -185,6 +185,30 @@ function addChangeStatusEvent(){
             let index = e.target.closest("[data-id]").dataset.id;
             projectsArray[index].changeStatus();
             updateShownProjects();
+            $('#updateModal').on('shown.bs.modal', function () {
+                // This code will run when the modal is fully shown and ready to be hidden
+                $('#updateModal').modal('hide');
+            });
+            
+        })
+    })
+}
+
+function addChangeCheckStatus(){
+    const checkBtnArray = document.getElementsByClassName("listCheckBtn");
+    Array.from(checkBtnArray).forEach(button =>{
+        button.addEventListener("click",e=>{
+            e.stopPropagation(); // Prevent propagation to the card
+            let objIndex = e.target.closest("[data-id]").dataset.id;
+            let checkIndex = e.target.closest("[data-checkid]").dataset.checkid;
+            projectsArray[objIndex].checkList[checkIndex].changeStatus();
+            if(projectsArray[objIndex].checkList[checkIndex].status){
+                let buttonSymbol = document.createElement("i");
+                buttonSymbol.classList.add("fa-solid", "fa-check");
+                e.target.appendChild(buttonSymbol);
+            }else{
+                e.target.closest("[data-checkid]").replaceChildren();
+            }
             $('#updateModal').on('shown.bs.modal', function () {
                 // This code will run when the modal is fully shown and ready to be hidden
                 $('#updateModal').modal('hide');
