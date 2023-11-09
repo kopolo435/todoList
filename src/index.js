@@ -28,7 +28,7 @@ let taskId;
 let currentProject = "Default";
 let projectsCategories = storage.getStoredCategories();
 let projectsArray = storage.getStoredTasks();
-
+let shouldHideModal = false;
 projectTitle.textContent = currentProject;
 mobileProjectTitle.textContent = currentProject;
 
@@ -179,30 +179,30 @@ function addUpdateEvent(taskCard){
 }
 
 function addChangeStatusEvent(){
+
     const checkBtnArray = document.getElementsByClassName("todoCheck");
-    Array.from(checkBtnArray).forEach(button =>{
-        button.addEventListener("click",e=>{
+    Array.from(checkBtnArray).forEach(button => {
+        button.addEventListener("click", e => {
             e.stopPropagation(); // Prevent propagation to the card
             let index = e.target.closest("[data-id]").dataset.id;
             projectsArray[index].changeStatus();
             updateShownProjects();
-            $('#updateModal').on('shown.bs.modal', function () {
-                // This code will run when the modal is fully shown and ready to be hidden
-                $('#updateModal').modal('hide');
-            });
-            storage.storeData(projectsArray,projectsCategories)
-        })
-    })
+            storage.storeData(projectsArray, projectsCategories);
+            shouldHideModal = true; // Set the flag to true
+        });
+    });
 }
 
 function addChangeCheckStatus(){
     const checkBtnArray = document.getElementsByClassName("listCheckBtn");
     Array.from(checkBtnArray).forEach(button =>{
         button.addEventListener("click",e=>{
+
             e.stopPropagation(); // Prevent propagation to the card
             let objIndex = e.target.closest("[data-id]").dataset.id;
             let checkIndex = e.target.closest("[data-checkid]").dataset.checkid;
             projectsArray[objIndex].changeCheckStatus(checkIndex);
+
             if(projectsArray[objIndex].checkList[checkIndex].status){
                 let buttonSymbol = document.createElement("i");
                 buttonSymbol.classList.add("fa-solid", "fa-check");
@@ -211,10 +211,7 @@ function addChangeCheckStatus(){
                 e.target.closest("[data-checkid]").replaceChildren();
             }
             completedCheckList(objIndex,projectsArray[objIndex])
-            $('#updateModal').on('shown.bs.modal', function () {
-                // This code will run when the modal is fully shown and ready to be hidden
-                $('#updateModal').modal('hide');
-            });
+            shouldHideModal = true; // Set the flag to true
             storage.storeData(projectsArray,projectsCategories)
         })
     })
@@ -232,12 +229,30 @@ function completedCheckList(objIndex,checkListObj){
 }
 
 deleteBtn.addEventListener("click",e=>{
+    e.stopPropagation(); // Prevent propagation to the card
     projectsArray = todoObjectsController.deleteTodoObject(projectsArray,taskId);
     updateShownProjects();
-    storage.storeData(projectsArray,projectsCategories)
+    storage.storeData(projectsArray,projectsCategories);
+    // if(e.target.getAttribute("id")==="deleteTask"){
+    //     $('#updateModal').on('shown.bs.modal', function () {
+    //         // This code will run when the modal is fully shown and ready to be hidden
+    //         $('#updateModal').modal('hide');
+    //     });
+    // }
+    $('#updateModal').modal('hide');
 })
 
 updateProjects();
+
+    // Use the modal show event to check and hide the modal if needed
+$('#updateModal').on('shown.bs.modal', function () {
+    if (shouldHideModal) {
+         // This code will run when the modal is fully shown, and the flag is set to true
+        $('#updateModal').modal('hide');
+        shouldHideModal = false; // Reset the flag
+    }
+});
+
 if(projectsArray.length >0){
     updateShownProjects();
 }
