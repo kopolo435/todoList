@@ -201,7 +201,7 @@ function addChangeCheckStatus(){
             e.stopPropagation(); // Prevent propagation to the card
             let objIndex = e.target.closest("[data-id]").dataset.id;
             let checkIndex = e.target.closest("[data-checkid]").dataset.checkid;
-            projectsArray[objIndex].checkList[checkIndex].changeStatus();
+            projectsArray[objIndex].changeCheckStatus(checkIndex);
             if(projectsArray[objIndex].checkList[checkIndex].status){
                 let buttonSymbol = document.createElement("i");
                 buttonSymbol.classList.add("fa-solid", "fa-check");
@@ -209,6 +209,7 @@ function addChangeCheckStatus(){
             }else{
                 e.target.closest("[data-checkid]").replaceChildren();
             }
+            completedCheckList(objIndex,projectsArray[objIndex])
             $('#updateModal').on('shown.bs.modal', function () {
                 // This code will run when the modal is fully shown and ready to be hidden
                 $('#updateModal').modal('hide');
@@ -216,6 +217,17 @@ function addChangeCheckStatus(){
             
         })
     })
+}
+
+function completedCheckList(objIndex,checkListObj){
+    const allCompleted = checkListObj.checkList.every(check => check.status === true);
+    if(allCompleted){
+        projectsArray[objIndex].status = allCompleted;
+        updateShownProjects();
+    }else{
+        projectsArray[objIndex].status = false;
+        updateShownProjects();
+    }
 }
 
 updateProjects();
