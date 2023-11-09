@@ -9,6 +9,7 @@ import * as storage from './storeDataController.js'
 import changeModalDisplay from "./updateTaskDisplay.js";
 import * as taskData from "./getFormData.js";
 import * as formUpdate from "./getUpdateData.js";
+import logo from './logo.png';
 
 const addBtn = document.getElementById("addBtn");
 const projectsContainer = document.getElementById("todoContainer");

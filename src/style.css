@@ -23,6 +23,16 @@ body{
 
 header{
     background-color: var(--main-color);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+}
+
+#headerText{
+    font-size: 32px;
+    margin-bottom: 0px;
 }
 
 main{
@@ -333,4 +343,9 @@ label p{
 }
 .bg-priority5{
     background-color: var(--priority-default);
+}
+
+/*Update Modal*/
+#updateFooter{
+    justify-content: space-between !important;
 }
