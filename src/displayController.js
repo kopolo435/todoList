@@ -134,17 +134,18 @@ function createCheckListDisplay(todoObj,id){
 function createChecksContainer(checksArray){
     let checksContainer = document.createElement("div");
     checksContainer.classList.add("checksContainer");
-    checksArray.forEach(checkObj => {
-        checksContainer.appendChild(createCheck(checkObj.title,checkObj.status));
+    checksArray.forEach((checkObj,index) => {
+        checksContainer.appendChild(createCheck(checkObj.title,checkObj.status,index));
     });
     return checksContainer;
 }
 
-function createCheck(title,status){
+function createCheck(title,status,index){
     let check  = document.createElement("div");
     check.classList.add("check");
 
     let miniCheckBtn = document.createElement("button");
+    miniCheckBtn.setAttribute("data-checkId",index);
     miniCheckBtn.classList.add("listCheckBtn", "btn");
     if(status){
         let buttonSymbol = document.createElement("i");
