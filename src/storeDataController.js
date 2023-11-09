@@ -77,11 +77,19 @@ function getTasks(){
 
 /*Almacena en el local storage toda la informacion guardada en la sesion*/
 function storeData(tasksArray,categoriesArray){
+    let actualCategories = tasksArray.map(obj => obj.project);
+    let unique = actualCategories.filter(onlyUnique);
     if (storageAvailable("localStorage")) {
         localStorage.setItem("taskList",JSON.stringify(tasksArray));
-        localStorage.setItem("categories",JSON.stringify(categoriesArray));
+        localStorage.setItem("categories",JSON.stringify(unique));
     } 
 }
+
+function onlyUnique(value, index, array) {
+  return array.indexOf(value) === index;
+}
+
+
   
 /*Crea los objetos con la informacion dada para añadirle los metodos*/
 function createObject(object){

@@ -28,6 +28,9 @@ let taskId;
 let currentProject = "Default";
 let projectsCategories = storage.getStoredCategories();
 let projectsArray = storage.getStoredTasks();
+if(projectsArray.indexOf("Default")<0){
+    projectsCategories.unshift("Default");
+}
 let shouldHideModal = false;
 projectTitle.textContent = currentProject;
 mobileProjectTitle.textContent = currentProject;
