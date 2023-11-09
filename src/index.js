@@ -1,7 +1,4 @@
-import createTodo from "./todoObject.js";
 import * as todoObjectsController  from "./todoObjectsController.js";
-import createNote from "./noteObject.js";
-import * as checkList from "./checkListObject.js";
 import style from "./style.css"; //Se coloca para que el webpack cargue el css
 import createElement from './displayController.js'
 import addTaskDisplay from './addTaskDisplay.js'
@@ -9,14 +6,11 @@ import * as storage from './storeDataController.js'
 import changeModalDisplay from "./updateTaskDisplay.js";
 import * as taskData from "./getFormData.js";
 import * as formUpdate from "./getUpdateData.js";
-import logo from './logo.png';
 
-const addBtn = document.getElementById("addBtn");
 const projectsContainer = document.getElementById("todoContainer");
 const completedProjectsContainer = document.getElementById("completedContainer")
 const taskTypeBtn = document.getElementById("selectType");
 const modalForm = document.getElementById("createHeader");
-const saveChangesBtn = document.getElementById("saveChanges");
 const categoriesList = document.getElementById("proyectosContainer");
 const projectTitle = document.getElementById("projectTItle");
 const mobileProjectTitle = document.getElementById("currentProjectTitle");
