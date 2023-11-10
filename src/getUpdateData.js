@@ -1,6 +1,9 @@
 import createTodo from "./todoObject.js";
 import createNote from "./noteObject.js";
 import * as checkList from "./checkListObject.js";
+
+/*Obtiene la la nueva informacion del update modal, crea un obj para almacenarla
+Devuelve un array con el todoObj y el project al cual pertenece*/
 function updateTodo(){
     let title = document.getElementById("updateTitle").value;
     let fecha = document.getElementById("updateFecha").value;
@@ -14,6 +17,8 @@ function updateTodo(){
     return returnArray;
 }
 
+/*Obtiene la la nueva informacion del update modal, crea un obj para almacenarla
+Devuelve un array con el noteObj y el project al cual pertenece*/
 function updateNote(){
     let title = document.getElementById("updateTitle").value;
     let fecha = new Date();
@@ -27,6 +32,8 @@ function updateNote(){
     return returnArray;
 }
 
+/*Obtiene la la nueva informacion del update modal, crea un obj para almacenarla
+Devuelve un array con el noteObj y el project al cual pertenece*/
 function updateChecklist(){
     let title = document.getElementById("updateTitle").value;
     let fecha = document.getElementById("updateFecha").value;
@@ -40,6 +47,8 @@ function updateChecklist(){
     return returnArray ;
 }
 
+/*Toma como argumento una string del project de un obj y comprueba si esta vacia
+Devuelve un boolean */
 function isProjectDefault(project){
     if (!project.length){
         return true
@@ -47,6 +56,7 @@ function isProjectDefault(project){
     else return false;
 }
 
+/*Obtiene los datos actualizados de los checks inputs, retorna un array de check obj*/
 function getChecksData(){
     const updateForm = document.getElementById("updateTask");
     const checkNodelist = updateForm.getElementsByClassName("createCheck");
