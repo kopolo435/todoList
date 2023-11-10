@@ -7,60 +7,70 @@ import changeModalDisplay from "./updateTaskDisplay.js";
 import * as taskData from "./getFormData.js";
 import * as formUpdate from "./getUpdateData.js";
 
-const projectsContainer = document.getElementById("todoContainer");
-const completedProjectsContainer = document.getElementById("completedContainer")
-const taskTypeBtn = document.getElementById("selectType");
-const modalForm = document.getElementById("createHeader");
-const categoriesList = document.getElementById("proyectosContainer");
+
+//Variables de elementos HTML
+//Contenedor que almacena los distintos projects disponibles
+const projectsContainer = document.getElementById("proyectosContainer");
+
+//Variables globales de elementos que muestran el titulo del project actual
 const projectTitle = document.getElementById("projectTItle");
 const mobileProjectTitle = document.getElementById("currentProjectTitle");
-const modal = document.getElementById("exampleModal");
+
+//Variables globales de contenedores de elementos task
+const taskContainer = document.getElementById("todoContainer");
+const completedTaskContainer = document.getElementById("completedContainer")
+
+//Variables globales de contenedores de inputs
+const addTaskContainer = document.getElementById("createHeader");
+
+//Variables globales de elementos, que tienen un evento
 const addTaskForm = document.getElementById("addTask");
 const updateTaskForm = document.getElementById("updateTask");
 const deleteBtn = document.getElementById("deleteTask");
+const taskTypeBtn = document.getElementById("selectType");
 
-let taskId;
-let currentProject = "Default";
-let projectsCategories = storage.getStoredCategories();
-let projectsArray = storage.getStoredTasks();
-if(projectsArray.indexOf("Default")<0){
-    projectsCategories.unshift("Default");
-}
+//Variables de javascript
+let tasksArray = storage.getStoredTasks(); //Contiene task Obj (todo,note,checkList)
+let taskId; //Variable que indica la posicion en projectsArray de un objeto
+let currentProject = "Default";  //Indica el project del cual se ven sus task
+let projectsCategories = storage.getStoredCategories(); //Contiene las distintos projects/Categorias
+
+//Variable que indica si se debe ocultar el modal que esta siendo mostrado, se usa para ocultar
+//cuando aparece el update modal al cambiar el estado de un task
 let shouldHideModal = false;
-projectTitle.textContent = currentProject;
-mobileProjectTitle.textContent = currentProject;
+
 
 
 function updateShownProjects(){
-    projectsArray = todoObjectsController.sortTodoListPriority(projectsArray);
-    projectsContainer.replaceChildren();
-    completedProjectsContainer.replaceChildren();
+    tasksArray = todoObjectsController.sortTodoListPriority(tasksArray);
+    taskContainer.replaceChildren();
+    completedTaskContainer.replaceChildren();
     projectTitle.textContent = currentProject;
     mobileProjectTitle.textContent = currentProject;
     if(currentProject != "Default"){
-        projectsArray.forEach((taskObj,index) =>{
+        tasksArray.forEach((taskObj,index) =>{
             if(taskObj.project ===currentProject){
                 if(!taskObj.status){
                     let taskCard = createElement(taskObj,index);
                     addUpdateEvent(taskCard);
-                    projectsContainer.appendChild(taskCard);
+                    taskContainer.appendChild(taskCard);
                 }else{
                     let taskCard = createElement(taskObj,index);
                     addUpdateEvent(taskCard);
-                    completedProjectsContainer.appendChild(taskCard);
+                    completedTaskContainer.appendChild(taskCard);
                 }
             }
         })
     }else{
-        projectsArray.forEach((taskObj,index) =>{
+        tasksArray.forEach((taskObj,index) =>{
             if(!taskObj.status){
                 let taskCard = createElement(taskObj,index);
                 addUpdateEvent(taskCard);
-                projectsContainer.appendChild(taskCard);
+                taskContainer.appendChild(taskCard);
             }else{
                 let taskCard = createElement(taskObj,index);
                 addUpdateEvent(taskCard);
-                completedProjectsContainer.appendChild(taskCard);
+                completedTaskContainer.appendChild(taskCard);
             }
         })
     }
@@ -71,9 +81,9 @@ function updateShownProjects(){
 
 taskTypeBtn.addEventListener("change",e =>{
     let elementsArray = addTaskDisplay(e.target.value);
-    modalForm.replaceChildren();
+    addTaskContainer.replaceChildren();
     elementsArray.forEach(item =>{
-        modalForm.appendChild(item);
+        addTaskContainer.appendChild(item);
     })
 })
 
@@ -86,25 +96,25 @@ updateTaskForm.addEventListener("submit",e=>{
     if(updateForm.getAttribute("data-type") === "todo"){
         objArray = formUpdate.updateTodo();
         updateObject = objArray[0];
-        projectsArray[taskId].updateObject(updateObject.title,updateObject.description,
+        tasksArray[taskId].updateObject(updateObject.title,updateObject.description,
             updateObject.dueDate,updateObject.priority,updateObject.project,updateObject.status);
     }else if(updateForm.getAttribute("data-type") === "note"){
         objArray = formUpdate.updateNote();
         updateObject = objArray[0];
-        projectsArray[taskId].updatenoteObject(updateObject.title,updateObject.noteText,
+        tasksArray[taskId].updatenoteObject(updateObject.title,updateObject.noteText,
             updateObject.lastModifiedDate,updateObject.priority,updateObject.project,
             updateObject.status);
     }else if(updateForm.getAttribute("data-type")=== "checkList"){
         objArray = formUpdate.updateChecklist();
         updateObject = objArray[0];
-        projectsArray[taskId].updateCheckList(updateObject.title,updateObject.checkList,
+        tasksArray[taskId].updateCheckList(updateObject.title,updateObject.checkList,
             updateObject.dueDate,updateObject.priority,updateObject.project,
             updateObject.status);
     }
     currentProject = isProjectDefault(objArray[1]) ? "Default" : objArray[1];
     addNewCategory(objArray[1]);
     updateShownProjects();
-    storage.storeData(projectsArray,projectsCategories)
+    storage.storeData(tasksArray,projectsCategories)
     console.log(localStorage)
 })
 
@@ -119,11 +129,11 @@ addTaskForm.addEventListener("submit",e=>{
     }else if(taskTypeBtn.value === "checklist"){
         objArray = taskData.callCreateChecklist();
     }
-    projectsArray.push(objArray[0]);
+    tasksArray.push(objArray[0]);
     currentProject = isProjectDefault(objArray[1]) ? "Default" : objArray[1];
     addNewCategory(objArray[1]);
     updateShownProjects();
-    storage.storeData(projectsArray,projectsCategories)
+    storage.storeData(tasksArray,projectsCategories)
     cleanAddTaskDisplay();
 })
 
@@ -142,12 +152,12 @@ function addNewCategory(project){
 }
 
 function updateProjects(){
-    categoriesList.replaceChildren();
+    projectsContainer.replaceChildren();
     projectsCategories.forEach(project=>{
         let pElement = document.createElement("p");
         pElement.textContent = project;
         pElement.addEventListener("click",changeCurrentProject);
-        categoriesList.appendChild(pElement);
+        projectsContainer.appendChild(pElement);
     })
 }
 function changeCurrentProject(event){
@@ -159,9 +169,9 @@ function changeCurrentProject(event){
 
 function cleanAddTaskDisplay(){
     let elementsArray = addTaskDisplay(taskTypeBtn.value);
-    modalForm.replaceChildren();
+    addTaskContainer.replaceChildren();
     elementsArray.forEach(item =>{
-        modalForm.appendChild(item);
+        addTaskContainer.appendChild(item);
     })
 }
 
@@ -171,7 +181,7 @@ function addUpdateEvent(taskCard){
             e.stopPropagation(); // Prevent propagation to the card
             const task = e.target.closest("[data-id]");
             taskId = task.dataset.id;
-            changeModalDisplay(projectsArray[taskId], modal);
+            changeModalDisplay(tasksArray[taskId]);
         }
     })
 }
@@ -183,9 +193,9 @@ function addChangeStatusEvent(){
         button.addEventListener("click", e => {
             e.stopPropagation(); // Prevent propagation to the card
             let index = e.target.closest("[data-id]").dataset.id;
-            projectsArray[index].changeStatus();
+            tasksArray[index].changeStatus();
             updateShownProjects();
-            storage.storeData(projectsArray, projectsCategories);
+            storage.storeData(tasksArray, projectsCategories);
             shouldHideModal = true; // Set the flag to true
         });
     });
@@ -199,18 +209,18 @@ function addChangeCheckStatus(){
             e.stopPropagation(); // Prevent propagation to the card
             let objIndex = e.target.closest("[data-id]").dataset.id;
             let checkIndex = e.target.closest("[data-checkid]").dataset.checkid;
-            projectsArray[objIndex].changeCheckStatus(checkIndex);
+            tasksArray[objIndex].changeCheckStatus(checkIndex);
 
-            if(projectsArray[objIndex].checkList[checkIndex].status){
+            if(tasksArray[objIndex].checkList[checkIndex].status){
                 let buttonSymbol = document.createElement("i");
                 buttonSymbol.classList.add("fa-solid", "fa-check");
                 e.target.appendChild(buttonSymbol);
             }else{
                 e.target.closest("[data-checkid]").replaceChildren();
             }
-            completedCheckList(objIndex,projectsArray[objIndex])
+            completedCheckList(objIndex,tasksArray[objIndex])
             shouldHideModal = true; // Set the flag to true
-            storage.storeData(projectsArray,projectsCategories)
+            storage.storeData(tasksArray,projectsCategories)
         })
     })
 }
@@ -218,19 +228,19 @@ function addChangeCheckStatus(){
 function completedCheckList(objIndex,checkListObj){
     const allCompleted = checkListObj.checkList.every(check => check.status === true);
     if(allCompleted){
-        projectsArray[objIndex].status = allCompleted;
+        tasksArray[objIndex].status = allCompleted;
         updateShownProjects();
     }else{
-        projectsArray[objIndex].status = false;
+        tasksArray[objIndex].status = false;
         updateShownProjects();
     }
 }
 
 deleteBtn.addEventListener("click",e=>{
     e.stopPropagation(); // Prevent propagation to the card
-    projectsArray = todoObjectsController.deleteTodoObject(projectsArray,taskId);
+    tasksArray = todoObjectsController.deleteTodoObject(tasksArray,taskId);
     updateShownProjects();
-    storage.storeData(projectsArray,projectsCategories);
+    storage.storeData(tasksArray,projectsCategories);
     // if(e.target.getAttribute("id")==="deleteTask"){
     //     $('#updateModal').on('shown.bs.modal', function () {
     //         // This code will run when the modal is fully shown and ready to be hidden
@@ -251,6 +261,14 @@ $('#updateModal').on('shown.bs.modal', function () {
     }
 });
 
-if(projectsArray.length >0){
+//Siempre agrega el project Default, en el cual se muestran todos los task siempre
+if(tasksArray.indexOf("Default")<0){
+    projectsCategories.unshift("Default");
+}
+
+if(tasksArray.length >0){
     updateShownProjects();
 }
+//Inicializa el titulo del project actual, debe iniciar con Default
+projectTitle.textContent = currentProject;
+mobileProjectTitle.textContent = currentProject;
