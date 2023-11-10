@@ -1,3 +1,5 @@
+/*Toma el type elegido en el modal de add task
+Devuelve un array con los elementos que se deben agregar al form del modal*/
 function updateTypeForm(currentType){
     let formElementArray =[];
     if(currentType ==="todo"){
@@ -10,6 +12,7 @@ function updateTypeForm(currentType){
     return formElementArray;
 }
 
+/*Llama a la funciones que crean los inputs de un toDo devuelve un array con node elements*/
 function createTodoDisplay(){
     let elementsArray = [];
     
@@ -22,6 +25,7 @@ function createTodoDisplay(){
     return elementsArray;
 }
 
+/*Llama a las funciones que crean los inputs de un note, devuelve un array con node elements */
 function createNoteDisplay(){
     let elementsArray = [];
     
@@ -33,6 +37,7 @@ function createNoteDisplay(){
     return elementsArray;
 }
 
+/*Llama a las funciones que crean los inputs de un checklist, devuelve un array con node elements */
 function createChecklistDisplay(){
     let elementsArray = [];
     
@@ -45,6 +50,7 @@ function createChecklistDisplay(){
     return elementsArray;
 }
 
+/*Crea los elementos necesarios para el input de title, devuelve un label */
 function createTitleLabel(){
     const label = document.createElement("label");
     label.setAttribute("for","createTitle");
@@ -64,6 +70,7 @@ function createTitleLabel(){
     return label;
 }
 
+/*Crea los elementos necesarios para el input de fecha, devuelve un label */
 function createFechaLabel(){
     const label = document.createElement("label");
     label.setAttribute("for","createFecha");
@@ -82,6 +89,7 @@ function createFechaLabel(){
     return label
 }
 
+/*Crea los elementos necesarios para el input de project, devuelve un label */
 function createProjectLabel(){
     const label = document.createElement("label");
     label.setAttribute("for","createProject");
@@ -102,6 +110,8 @@ function createProjectLabel(){
     return label;
 }
 
+/*Crea un toolTip con clases de boostrap. title es el tip que aparece y content
+el texto sobre el cual al hacer hover aparece el tip */
 function createToolTip(title,content){
     const paragraph = document.createElement("p");
     paragraph.setAttribute("data-bs-toggle","tooltip");
@@ -110,6 +120,7 @@ function createToolTip(title,content){
     return paragraph;
 }
 
+/*Crea la label que contiene el input de prioridad, devuelve un label element */
 function createPriorityLabel(){
     const label = document.createElement("label");
     label.setAttribute("for","createPriority");
@@ -119,13 +130,13 @@ function createPriorityLabel(){
         const select = document.createElement("select");
         select.setAttribute("name","priority");
         select.setAttribute("id","createPriority");
-        for(let i=1; i<6;i++){
+        for(let priorityNumber=1; priorityNumber<6;priorityNumber++){
             let option = document.createElement("option");
-            if(i===5){
+            if(priorityNumber===5){
                 option.selected = true;
             }
-            option.setAttribute("value",i);
-            option.textContent = i;
+            option.setAttribute("value",priorityNumber);
+            option.textContent = priorityNumber;
             select.appendChild(option)
         }
         return select;
@@ -136,6 +147,7 @@ function createPriorityLabel(){
     return label;
 }
 
+/*Crea label que contiene input de descripcion. Devuelve un label element */
 function createDescriptionLabel(){
     const label = document.createElement("label");
     label.setAttribute("for","createInfo");
@@ -155,6 +167,7 @@ function createDescriptionLabel(){
     return label;
 }
 
+/*Crea contenedor que almacena los checks de una checklist, devuelve un div element */
 function createCheckContainer(){
     const checkContainer = document.createElement("div");
     checkContainer.setAttribute("id","createChecksContainer");
@@ -162,7 +175,8 @@ function createCheckContainer(){
     return checkContainer
 }
 
-
+/*Crea label que almacena input de un check, toma como argumento la posicion en la cual se
+crea el label. Devuelve un label element */
 function createChecksLabel(position){
     const label = document.createElement("label");
     label.setAttribute("for","check"+position);
@@ -179,6 +193,8 @@ function createChecksLabel(position){
 
 }
 
+/*Crea el input de un check, toma la posicion en la que se esta creando. Devuelve un 
+input*/
 function createCheck(position){
     const check = document.createElement("input");
     check.setAttribute("type","text");
@@ -187,8 +203,9 @@ function createCheck(position){
     check.setAttribute("data-position",position)
     check.classList.add("createCheck");
 
+    //El evento permite crear nuevos checks dinamicamente cuando el usuario escribe en ellos
     const addCheckEvent = function(e){
-        if(e.target.value.length >= 3){
+        if(e.target.value.length >= 3){ //Si se han escrito mas de 3 letras se crea un input adicional
             const checkContainer = document.getElementById("createChecksContainer");
             checkContainer.appendChild(createChecksLabel(Number(e.target.getAttribute("data-position"))+1));
             e.target.removeEventListener("keyup",addCheckEvent);
