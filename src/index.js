@@ -50,33 +50,28 @@ function updateShownProjects(){
     if(currentProject != "Default"){
         tasksArray.forEach((taskObj,index) =>{
             if(taskObj.project ===currentProject){
-                if(!taskObj.status){
-                    let taskCard = createElement(taskObj,index);
-                    addUpdateEvent(taskCard);
-                    taskContainer.appendChild(taskCard);
-                }else{
-                    let taskCard = createElement(taskObj,index);
-                    addUpdateEvent(taskCard);
-                    completedTaskContainer.appendChild(taskCard);
-                }
+                addTaskToContainer(taskObj,index)
             }
         })
     }else{
         tasksArray.forEach((taskObj,index) =>{
-            if(!taskObj.status){
-                let taskCard = createElement(taskObj,index);
-                addUpdateEvent(taskCard);
-                taskContainer.appendChild(taskCard);
-            }else{
-                let taskCard = createElement(taskObj,index);
-                addUpdateEvent(taskCard);
-                completedTaskContainer.appendChild(taskCard);
-            }
+            addTaskToContainer(taskObj,index)
         })
     }
     addChangeStatusEvent();
     addChangeCheckStatus();
 
+}
+
+function addTaskToContainer(taskObj,index){
+    let taskCard= createElement(taskObj,index);
+    if(!taskObj.status){
+        addUpdateEvent(taskCard);
+        taskContainer.appendChild(taskCard);
+    }else{
+        addUpdateEvent(taskCard);
+        completedTaskContainer.appendChild(taskCard);
+    }
 }
 
 taskTypeBtn.addEventListener("change",e =>{
