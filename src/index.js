@@ -40,7 +40,7 @@ let projectsCategories = storage.getStoredCategories(); //Contiene las distintos
 let shouldHideModal = false;
 
 
-
+//Se encarga de agregar los task al display
 function updateShownTasks(){
     tasksArray = todoObjectsController.sortTodoListPriority(tasksArray);
     //Limpia contenido de containers
@@ -79,6 +79,7 @@ function addTaskToContainer(taskObj,index){
     }
 }
 
+//Comprueba si el project es valido, devuelve un boolean
 function isProjectDefault(project){
     if (!project.length){
         return true
@@ -86,6 +87,7 @@ function isProjectDefault(project){
     else return false;
 }
 
+//Añade una nueva categoria project, si el project no se encuentra ya registrado
 function addNewCategory(project){
     if(projectsCategories.indexOf(project)<0){
         projectsCategories.push(project);
@@ -93,6 +95,7 @@ function addNewCategory(project){
     }
 }
 
+//Actualiza el contenido de la lista de projects
 function updateProjects(){
     projectsContainer.replaceChildren();
     projectsCategories.forEach(project=>{
@@ -102,6 +105,8 @@ function updateProjects(){
         projectsContainer.appendChild(pElement);
     })
 }
+
+//Se encarga de modificar el project actual
 function changeCurrentProject(event){
     currentProject = event.target.textContent;
     event.target.classList.add("currentProject");
@@ -109,6 +114,7 @@ function changeCurrentProject(event){
     updateShownTasks();
 }
 
+//Modifica el contenido de el add task modal
 function cleanAddTaskDisplay(){
     let elementsArray = addTaskDisplay(taskTypeBtn.value);
     addTaskContainer.replaceChildren();
@@ -117,6 +123,8 @@ function cleanAddTaskDisplay(){
     })
 }
 
+//Le agrega un evento a los button que contiene las task
+//Este es el evento que le permite mostrar el update modal
 function addUpdateEvent(taskCard){
     taskCard.addEventListener("click", e=>{
         if (!e.target.classList.contains("todoCheck")) {
@@ -128,6 +136,7 @@ function addUpdateEvent(taskCard){
     })
 }
 
+//Agrega evento que permite cambiar el status de una nota o todo
 function addChangeStatusEvent(){
 
     const checkBtnArray = document.getElementsByClassName("todoCheck");
@@ -138,11 +147,12 @@ function addChangeStatusEvent(){
             tasksArray[index].changeStatus();
             updateShownTasks();
             storage.storeData(tasksArray, projectsCategories);
-            shouldHideModal = true; // Set the flag to true
+            shouldHideModal = true; // Set the flag to true, para evitar se muestre el update modal
         });
     });
 }
 
+//Agrega evento que permite cambiar el status de los checks de una checklist
 function addChangeCheckStatus(){
     const checkBtnArray = document.getElementsByClassName("listCheckBtn");
     Array.from(checkBtnArray).forEach(button =>{
@@ -161,12 +171,14 @@ function addChangeCheckStatus(){
                 e.target.closest("[data-checkid]").replaceChildren();
             }
             completedCheckList(objIndex,tasksArray[objIndex])
-            shouldHideModal = true; // Set the flag to true
+            shouldHideModal = true; // Set the flag to true, para evitar se muestre el update modal
             storage.storeData(tasksArray,projectsCategories)
         })
     })
 }
 
+//Comprueba si una checkList esta completada al tener todos sus checks como completados
+//Modifica el display si cambia el estado de la checkList
 function completedCheckList(objIndex,checkListObj){
     const allCompleted = checkListObj.checkList.every(check => check.status === true);
     if(allCompleted){
@@ -222,7 +234,7 @@ updateTaskForm.addEventListener("submit",e=>{
     storage.storeData(tasksArray,projectsCategories)
 })
 
-
+//Evento que crea el task obj cuando se ingresan los datos
 addTaskForm.addEventListener("submit",e=>{
     let objArray;
     e.preventDefault()
@@ -241,7 +253,7 @@ addTaskForm.addEventListener("submit",e=>{
     cleanAddTaskDisplay();
 })
 
-
+//Evento que permite eliminar el task obj indicado
 deleteBtn.addEventListener("click",e=>{
     e.stopPropagation(); // Prevent propagation to the card
     tasksArray = todoObjectsController.deleteTodoObject(tasksArray,taskId);
@@ -251,7 +263,7 @@ deleteBtn.addEventListener("click",e=>{
 })
 
 
-    // Use the modal show event to check and hide the modal if needed
+// Use the modal show event to check and hide the modal if needed
 $('#updateModal').on('shown.bs.modal', function () {
     if (shouldHideModal) {
          // This code will run when the modal is fully shown, and the flag is set to true
@@ -260,7 +272,7 @@ $('#updateModal').on('shown.bs.modal', function () {
     }
 });
 
-
+//Muestra los projects actuales
 updateProjects();
 
 //Siempre agrega el project Default, en el cual se muestran todos los task siempre
