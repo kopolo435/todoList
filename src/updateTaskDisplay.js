@@ -1,21 +1,21 @@
 import format from 'date-fns/format/index.js'
 /*Recibe el objeto que se desea actualizar, utiliza la informacion de
 ese objeto para mostrar el modal con la informacion que se podra modificar*/
-function changeModalDisplay(taskObj,modal){
+function changeModalDisplay(taskObj){
     const updateForm = document.getElementById("updateTask");
     if(taskObj.type === "todo"){
         updateForm.setAttribute("data-type","todo");
-        updateTodoDisplay(taskObj,modal);
+        updateTodoDisplay(taskObj);
     }else if(taskObj.type ==="note"){
         updateForm.setAttribute("data-type","note");
-        updateNoteDisplay(taskObj,modal);
+        updateNoteDisplay(taskObj);
     }else{
         updateForm.setAttribute("data-type","checkList");
-        updateChecklistDisplay(taskObj,modal);
+        updateChecklistDisplay(taskObj);
     }
 }
 
-function updateTodoDisplay(todoObj,modal){
+function updateTodoDisplay(todoObj){
     const title = document.getElementById("updateTitle");
     const fecha = document.getElementById("updateFecha");
     const project = document.getElementById("updateProject");
@@ -31,7 +31,7 @@ function updateTodoDisplay(todoObj,modal){
     description.value = todoObj.description;
 }
 
-function updateNoteDisplay(noteObj,moda){
+function updateNoteDisplay(noteObj){
     const title = document.getElementById("updateTitle");
     const fecha = document.getElementById("updateFecha");
     const project = document.getElementById("updateProject");
@@ -48,7 +48,7 @@ function updateNoteDisplay(noteObj,moda){
     status.value = noteObj.status;
 }
 
-function updateChecklistDisplay(checkObj,modal){
+function updateChecklistDisplay(checkObj){
     const title = document.getElementById("updateTitle");
     const fecha = document.getElementById("updateFecha");
     const project = document.getElementById("updateProject");
