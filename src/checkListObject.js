@@ -1,4 +1,6 @@
 import format from 'date-fns/format/index.js'
+/*Check son las tareas individuales dentro de un checkList title contiene
+ el titulo de la tarea y status indica si ya completo */
 const createCheck = (title,status=false)=>{
     const type = "listCheck";
     return{
@@ -21,6 +23,12 @@ const createCheck = (title,status=false)=>{
     }
 }
 
+/*CheckList es el objeto que almacena distintos checks. title es su titulo
+checkList es un array que contiene los distintos objectos checks. 
+dueDate un date obj
+priority la string de un numero (1 a 5),
+project la categoria a la que pertenece la checklist,
+status indica si ya fueron completadas todos los checks, status depende del estado de los checks */
 const createCheckList = (title,checkList,dueDate,priority,project,status=false)=>{
     const type = "checkList";
     
@@ -84,7 +92,7 @@ const createCheckList = (title,checkList,dueDate,priority,project,status=false)=
 
             return format(dueDate,"P");
         },
-        updateStatus : function(){
+        updateStatus : function(){ //El status de un checklist, depende del status de sus checks
             let newStatus = true;
             this.checkList.forEach(check => {
                 if (!(check.status)){
@@ -96,6 +104,8 @@ const createCheckList = (title,checkList,dueDate,priority,project,status=false)=
     }
 }
 
+/*Crea un array de checks Obj. Toma como argumento un array de string que contienen el titulo
+de los checks a crear*/
 function createChecksArray(stringListCheck){
     let newCheckList = [];
     stringListCheck.forEach(element => {
