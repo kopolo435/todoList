@@ -1,4 +1,6 @@
-//Toma el objeto a crear y devuelve su informacion como un elemento html
+/*Llama a las funciones que crean el element que muestra la informacion del todoObj
+todoObj es un objecto de tipo (todo,note,checkList), id indica su posicion respecto a otros obj
+Retorna un button element*/
 function createElement(todoObj,id){
     let todoElement;
     if(todoObj.type ==="todo"){
@@ -14,12 +16,15 @@ function createElement(todoObj,id){
     return todoElement;
 }
 
-//Crea el display de un objeto de type "todo"
+//Crea el display de un objeto de type "todo", utiiza la informacion del obj pasado
+/*todoObj: obj de tipo todo, id: numero */
 function createTodoDisplay(todoObj,id){
     let todoDisplay = document.createElement("button");
     let classColor = getPriorityColor(todoObj.priority);
     todoDisplay.classList.add("todo",classColor,"btn");
     todoDisplay.setAttribute("data-id",id);
+
+    //Atributos de boostrap, para hacer uso del update modal
     todoDisplay.setAttribute("data-bs-toggle","modal");
     todoDisplay.setAttribute("data-bs-target","#updateModal");
 
@@ -67,7 +72,7 @@ function createTodoTop(title,date,project){
     return todoTop;
 }
 
-/*Crea el elemento que muestra la descripción del todo*/
+/*Crea el elemento que muestra la descripción del todo. descripcion: string*/
 function createTodoDescription(descripcion){
     let descriptionDisplay = document.createElement("p");
     descriptionDisplay.classList.add("todoDescription");
@@ -76,7 +81,8 @@ function createTodoDescription(descripcion){
     return descriptionDisplay;
 }
 
-/*Determina la clase del elemento segun su prioridad*/
+/*Determina determinar el color de button container del obj segun su prioridad
+priority: numero del 1 a 5*/
 function getPriorityColor(priority){
     let color;
     switch (priority) {
@@ -100,33 +106,39 @@ function getPriorityColor(priority){
     return color;
 }
 
-/*Crea el elemento html para display de un note */
-function createNoteDisplay(todoObj,id){
-    let todoDisplay = document.createElement("button");
-    let classColor = getPriorityColor(todoObj.priority);
-    todoDisplay.classList.add("note",classColor,"btn");
-    todoDisplay.setAttribute("data-id",id);
-    todoDisplay.setAttribute("data-bs-toggle","modal");
-    todoDisplay.setAttribute("data-bs-target","#updateModal");
+//Crea el display de un objeto de type "note", utiiza la informacion del obj pasado
+/*noteObj: obj de tipo note, id: numero */
+function createNoteDisplay(noteObj,id){
+    let noteDisplay = document.createElement("button");
+    let classColor = getPriorityColor(noteObj.priority);
+    noteDisplay.classList.add("note",classColor,"btn");
+    noteDisplay.setAttribute("data-id",id);
 
-    todoDisplay.appendChild(createTodoCheckBtn(todoObj.status));
-    todoDisplay.appendChild(createTodoTop(todoObj.title,todoObj.getFormatedDate(),todoObj.project));
-    todoDisplay.appendChild(createTodoDescription(todoObj.noteText));
+    //Atributos de boostrap, para hacer uso del update modal
+    noteDisplay.setAttribute("data-bs-toggle","modal");
+    noteDisplay.setAttribute("data-bs-target","#updateModal");
 
-    return todoDisplay;
+    noteDisplay.appendChild(createTodoCheckBtn(noteObj.status));
+    noteDisplay.appendChild(createTodoTop(noteObj.title,noteObj.getFormatedDate(),noteObj.project));
+    noteDisplay.appendChild(createTodoDescription(noteObj.noteText));
+
+    return noteDisplay;
 }
 
-/*Crea el elemento html para un checklist*/
-function createCheckListDisplay(todoObj,id){
+//Crea el display de un objeto de type "checkList", utiiza la informacion del obj pasado
+/*checkListObj: obj de tipo note, id: numero */
+function createCheckListDisplay(checkListObj,id){
     let checklistDisplay = document.createElement("button");
-    let classColor = getPriorityColor(todoObj.priority);
+    let classColor = getPriorityColor(checkListObj.priority);
     checklistDisplay.classList.add("checkList",classColor,"btn");
     checklistDisplay.setAttribute("data-id",id);
+
+    //Atributos de boostrap, para hacer uso del update modal
     checklistDisplay.setAttribute("data-bs-toggle","modal");
     checklistDisplay.setAttribute("data-bs-target","#updateModal");
     
-    checklistDisplay.appendChild(createTodoTop(todoObj.title,todoObj.getFormatedDate(),todoObj.project));
-    checklistDisplay.appendChild(createChecksContainer(todoObj.checkList));
+    checklistDisplay.appendChild(createTodoTop(checkListObj.title,checkListObj.getFormatedDate(),checkListObj.project));
+    checklistDisplay.appendChild(createChecksContainer(checkListObj.checkList));
 
     return checklistDisplay;
 }
@@ -140,6 +152,7 @@ function createChecksContainer(checksArray){
     return checksContainer;
 }
 
+/*Crea el display de los checks, title: string, status:boolean, index:number */
 function createCheck(title,status,index){
     let check  = document.createElement("div");
     check.classList.add("check");
