@@ -41,12 +41,16 @@ let shouldHideModal = false;
 
 
 
-function updateShownProjects(){
+function updateShownTasks(){
     tasksArray = todoObjectsController.sortTodoListPriority(tasksArray);
+    //Limpia contenido de containers
     taskContainer.replaceChildren();
     completedTaskContainer.replaceChildren();
+    //Modifica titulo actual mostrado
     projectTitle.textContent = currentProject;
     mobileProjectTitle.textContent = currentProject;
+
+    //Dependiendo de si el project acual es Default o no, se realiza un filtro segun project
     if(currentProject != "Default"){
         tasksArray.forEach((taskObj,index) =>{
             if(taskObj.project ===currentProject){
@@ -63,6 +67,7 @@ function updateShownProjects(){
 
 }
 
+//Agrega el task indicado al container dependiendo de su status
 function addTaskToContainer(taskObj,index){
     let taskCard= createElement(taskObj,index);
     if(!taskObj.status){
@@ -73,64 +78,6 @@ function addTaskToContainer(taskObj,index){
         completedTaskContainer.appendChild(taskCard);
     }
 }
-
-taskTypeBtn.addEventListener("change",e =>{
-    let elementsArray = addTaskDisplay(e.target.value);
-    addTaskContainer.replaceChildren();
-    elementsArray.forEach(item =>{
-        addTaskContainer.appendChild(item);
-    })
-})
-
-
-updateTaskForm.addEventListener("submit",e=>{
-    let updateForm = document.getElementById("updateTask");
-    let objArray;
-    let updateObject;
-    e.preventDefault()
-    if(updateForm.getAttribute("data-type") === "todo"){
-        objArray = formUpdate.updateTodo();
-        updateObject = objArray[0];
-        tasksArray[taskId].updateObject(updateObject.title,updateObject.description,
-            updateObject.dueDate,updateObject.priority,updateObject.project,updateObject.status);
-    }else if(updateForm.getAttribute("data-type") === "note"){
-        objArray = formUpdate.updateNote();
-        updateObject = objArray[0];
-        tasksArray[taskId].updatenoteObject(updateObject.title,updateObject.noteText,
-            updateObject.lastModifiedDate,updateObject.priority,updateObject.project,
-            updateObject.status);
-    }else if(updateForm.getAttribute("data-type")=== "checkList"){
-        objArray = formUpdate.updateChecklist();
-        updateObject = objArray[0];
-        tasksArray[taskId].updateCheckList(updateObject.title,updateObject.checkList,
-            updateObject.dueDate,updateObject.priority,updateObject.project,
-            updateObject.status);
-    }
-    currentProject = isProjectDefault(objArray[1]) ? "Default" : objArray[1];
-    addNewCategory(objArray[1]);
-    updateShownProjects();
-    storage.storeData(tasksArray,projectsCategories)
-    console.log(localStorage)
-})
-
-
-addTaskForm.addEventListener("submit",e=>{
-    let objArray;
-    e.preventDefault()
-    if(taskTypeBtn.value === "todo"){
-        objArray = taskData.callCreateTodo();
-    }else if(taskTypeBtn.value === "note"){
-        objArray = taskData.callCreateNote();
-    }else if(taskTypeBtn.value === "checklist"){
-        objArray = taskData.callCreateChecklist();
-    }
-    tasksArray.push(objArray[0]);
-    currentProject = isProjectDefault(objArray[1]) ? "Default" : objArray[1];
-    addNewCategory(objArray[1]);
-    updateShownProjects();
-    storage.storeData(tasksArray,projectsCategories)
-    cleanAddTaskDisplay();
-})
 
 function isProjectDefault(project){
     if (!project.length){
@@ -159,7 +106,7 @@ function changeCurrentProject(event){
     currentProject = event.target.textContent;
     event.target.classList.add("currentProject");
     projectTitle.textContent = event.target.textContent;
-    updateShownProjects();
+    updateShownTasks();
 }
 
 function cleanAddTaskDisplay(){
@@ -189,7 +136,7 @@ function addChangeStatusEvent(){
             e.stopPropagation(); // Prevent propagation to the card
             let index = e.target.closest("[data-id]").dataset.id;
             tasksArray[index].changeStatus();
-            updateShownProjects();
+            updateShownTasks();
             storage.storeData(tasksArray, projectsCategories);
             shouldHideModal = true; // Set the flag to true
         });
@@ -224,28 +171,85 @@ function completedCheckList(objIndex,checkListObj){
     const allCompleted = checkListObj.checkList.every(check => check.status === true);
     if(allCompleted){
         tasksArray[objIndex].status = allCompleted;
-        updateShownProjects();
+        updateShownTasks();
     }else{
         tasksArray[objIndex].status = false;
-        updateShownProjects();
+        updateShownTasks();
     }
 }
+
+//Event listeners 
+
+//Indica cuando se debe cambiar el display del add modal
+taskTypeBtn.addEventListener("change",e =>{
+    let elementsArray = addTaskDisplay(e.target.value);
+    addTaskContainer.replaceChildren();
+    elementsArray.forEach(item =>{
+        addTaskContainer.appendChild(item);
+    })
+})
+
+//Actualiza el objeto indicado segun el id, con la informacion dentro del updateModal
+updateTaskForm.addEventListener("submit",e=>{
+    let updateForm = document.getElementById("updateTask");
+    let objArray;
+    let updateObject;
+    e.preventDefault()
+
+    if(updateForm.getAttribute("data-type") === "todo"){
+        objArray = formUpdate.updateTodo();
+        updateObject = objArray[0];
+        tasksArray[taskId].updateObject(updateObject.title,updateObject.description,
+            updateObject.dueDate,updateObject.priority,updateObject.project,updateObject.status);
+
+    }else if(updateForm.getAttribute("data-type") === "note"){
+        objArray = formUpdate.updateNote();
+        updateObject = objArray[0];
+        tasksArray[taskId].updatenoteObject(updateObject.title,updateObject.noteText,
+            updateObject.lastModifiedDate,updateObject.priority,updateObject.project,
+            updateObject.status);
+
+    }else if(updateForm.getAttribute("data-type")=== "checkList"){
+        objArray = formUpdate.updateChecklist();
+        updateObject = objArray[0];
+        tasksArray[taskId].updateCheckList(updateObject.title,updateObject.checkList,
+            updateObject.dueDate,updateObject.priority,updateObject.project,
+            updateObject.status);
+    }
+    currentProject = isProjectDefault(objArray[1]) ? "Default" : objArray[1];
+    addNewCategory(objArray[1]);
+    updateShownTasks();
+    storage.storeData(tasksArray,projectsCategories)
+})
+
+
+addTaskForm.addEventListener("submit",e=>{
+    let objArray;
+    e.preventDefault()
+    if(taskTypeBtn.value === "todo"){
+        objArray = taskData.callCreateTodo();
+    }else if(taskTypeBtn.value === "note"){
+        objArray = taskData.callCreateNote();
+    }else if(taskTypeBtn.value === "checklist"){
+        objArray = taskData.callCreateChecklist();
+    }
+    tasksArray.push(objArray[0]);
+    currentProject = isProjectDefault(objArray[1]) ? "Default" : objArray[1];
+    addNewCategory(objArray[1]);
+    updateShownTasks();
+    storage.storeData(tasksArray,projectsCategories)
+    cleanAddTaskDisplay();
+})
+
 
 deleteBtn.addEventListener("click",e=>{
     e.stopPropagation(); // Prevent propagation to the card
     tasksArray = todoObjectsController.deleteTodoObject(tasksArray,taskId);
-    updateShownProjects();
+    updateShownTasks();
     storage.storeData(tasksArray,projectsCategories);
-    // if(e.target.getAttribute("id")==="deleteTask"){
-    //     $('#updateModal').on('shown.bs.modal', function () {
-    //         // This code will run when the modal is fully shown and ready to be hidden
-    //         $('#updateModal').modal('hide');
-    //     });
-    // }
     $('#updateModal').modal('hide');
 })
 
-updateProjects();
 
     // Use the modal show event to check and hide the modal if needed
 $('#updateModal').on('shown.bs.modal', function () {
@@ -256,13 +260,16 @@ $('#updateModal').on('shown.bs.modal', function () {
     }
 });
 
+
+updateProjects();
+
 //Siempre agrega el project Default, en el cual se muestran todos los task siempre
 if(tasksArray.indexOf("Default")<0){
     projectsCategories.unshift("Default");
 }
 
 if(tasksArray.length >0){
-    updateShownProjects();
+    updateShownTasks();
 }
 //Inicializa el titulo del project actual, debe iniciar con Default
 projectTitle.textContent = currentProject;
