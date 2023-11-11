@@ -82,6 +82,11 @@ footer{
     background-color: var(--third-color);
     display: flex;
     justify-content: center;
+    padding: 5px 10px;
+}
+
+footer a{
+    color: #272829;
 }
 
 #asideTitle{
@@ -92,12 +97,26 @@ footer{
     color: white;
 }
 
+#tareasPendintesText{
+    margin-left: 5px;
+    font-size: 20px;
+}
+
 #todoContainer{
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
     margin-bottom: 10px;
+}
+
+#todoContainer .note,#todoContainer .todo,
+#todoContainer .checkList{
+    border: none;
+}
+
+#todoContainer button:hover,#todoContainer button:focus{
+    border: 3px solid black;
 }
 
 #completedContainer{
