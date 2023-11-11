@@ -272,13 +272,15 @@ $('#updateModal').on('shown.bs.modal', function () {
     }
 });
 
-//Muestra los projects actuales
-updateProjects();
+
 
 //Siempre agrega el project Default, en el cual se muestran todos los task siempre
-if(tasksArray.indexOf("Default")<0){
+if(projectsCategories.indexOf("Default")<0){
     projectsCategories.unshift("Default");
 }
+
+//Muestra los projects actuales
+updateProjects();
 
 if(tasksArray.length >0){
     updateShownTasks();
