@@ -1,4 +1,10 @@
 import format from 'date-fns/format/index.js'
+/*Modulo que se encarga de modificar el aspecto del modal que muestra la informacion
+de la task la cual se quiere actualizar. La creacion de los distintos elementos html
+viene de la estructura con la que se creo el modal de add Task, pero en este modulo
+también se le añade los values a los input */
+
+
 /*Recibe el objeto que se desea actualizar, utiliza la informacion de
 ese objeto para mostrar el modal con la informacion que se podra modificar*/
 function changeModalDisplay(taskObj){
@@ -15,12 +21,15 @@ function changeModalDisplay(taskObj){
     }
 }
 
+/*Se encarga modificar los valores del input de el updateModal con los datos de un todoObj */
 function updateTodoDisplay(todoObj){
     const title = document.getElementById("updateTitle");
     const fecha = document.getElementById("updateFecha");
     const project = document.getElementById("updateProject");
     const priority = document.getElementById("updatePriority");
     const description = document.getElementById("updateInfo");
+
+    /*Comprueba si el objeto actual tiene descripcion o checklist */
     checkIFShowDescription(todoObj);
 
 
@@ -31,6 +40,7 @@ function updateTodoDisplay(todoObj){
     description.value = todoObj.description;
 }
 
+/*Se encarga modificar los valores del input de el updateModal con los datos de un noteObj */
 function updateNoteDisplay(noteObj){
     const title = document.getElementById("updateTitle");
     const fecha = document.getElementById("updateFecha");
@@ -38,6 +48,8 @@ function updateNoteDisplay(noteObj){
     const priority = document.getElementById("updatePriority");
     const description = document.getElementById("updateInfo");
     const status = document.getElementById("updateStatus");
+
+    /*Comprueba si el objeto actual tiene descripcion o checklist */
     checkIFShowDescription(noteObj);
 
     title.value = noteObj.title;
@@ -48,20 +60,24 @@ function updateNoteDisplay(noteObj){
     status.value = noteObj.status;
 }
 
-function updateChecklistDisplay(checkObj){
+/*Se encarga modificar los valores del input de el updateModal con los datos de un checkList */
+function updateChecklistDisplay(checkListObj){
     const title = document.getElementById("updateTitle");
     const fecha = document.getElementById("updateFecha");
     const project = document.getElementById("updateProject");
     const priority = document.getElementById("updatePriority");
-    checkIFShowDescription(checkObj);
+
+    /*Comprueba si el objeto actual tiene descripcion o checklist */
+    checkIFShowDescription(checkListObj);
     
-    title.value = checkObj.title;
-    fecha.value = format(checkObj.dueDate, "yyyy-MM-dd'");;
-    project.value = checkObj.project;
-    priority.value = checkObj.priority;
-    addChecksContainer(checkObj);
+    title.value = checkListObj.title;
+    fecha.value = format(checkListObj.dueDate, "yyyy-MM-dd'");;
+    project.value = checkListObj.project;
+    priority.value = checkListObj.priority;
+    addChecksContainer(checkListObj);
 }
 
+/*Se encarga agregar los inputs de checks dentro de el div */
 function addChecksContainer(checkObj){
     const checkContainer = document.getElementById("updateCheckContainer");
     let checksArray = checkObj.checkList;
@@ -75,7 +91,7 @@ function addChecksContainer(checkObj){
     return checkContainer
 }
 
-
+/*Crea la label que contiene los inputs de checks */
 function createChecksLabel(checkObj,position){
     const label = document.createElement("label");
     label.setAttribute("for","check"+position);
@@ -92,6 +108,7 @@ function createChecksLabel(checkObj,position){
 
 }
 
+/*Crea los inputs de check*/
 function createCheck(checkObj,position){
     const check = document.createElement("input");
     check.setAttribute("type","text");
@@ -110,6 +127,9 @@ function createCheck(checkObj,position){
     return check;
 }
 
+/*El updateModal contiene tanto los elementos de checks container y description
+Esta funcion se encarga de comprobar cual de los elementos se debe ocultar para
+que se muestre el correcto segun el type del object */
 function checkIFShowDescription(taskObj){
     const checkContainer = document.getElementById("updateCheckContainer");
     const descriptionContainer = document.getElementById("descriptionLabel");
@@ -125,7 +145,8 @@ function checkIFShowDescription(taskObj){
     }
 }
 
-//Funciones para crear el ultimo check input que permite añadir nuevos
+//Funciones para crear el ultimo check input que permite añadir nuevos inputs de checks
+//Crea la label que almacena el check
 function createLastChecksLabel(position){
     const label = document.createElement("label");
     label.setAttribute("for","check"+position);
@@ -142,6 +163,8 @@ function createLastChecksLabel(position){
 
 }
 
+/*Se encarga de añadir el evento que permite añadir más checks desde el ultimo check
+que aparece*/
 function createLastCheck(position){
     const check = document.createElement("input");
     check.setAttribute("type","text");
