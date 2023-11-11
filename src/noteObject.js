@@ -1,4 +1,12 @@
 import format from 'date-fns/format/index.js'
+
+/*note es un objeto que almacena informacion de una note.
+title es su titulo
+noteText es el texto de la note
+lastModifiedDate es un date obj de la ultima vez que se creo/actualizo la nota
+priority la string de un numero (1 a 5),
+project la categoria a la que pertenece la note
+status indica si la nota fue completada o no*/
 const createNote = (title,noteText,lastModifiedDate,priority,project,status=false)=>{
     const type = "note";
 
