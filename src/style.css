@@ -10,6 +10,9 @@
     --priority-third:#FFE433;
     --priority-fourth:#33FF57;
     --priority-default:#33A1FF;
+
+    /*Colores para task completas, segun prioridad*/
+    --completed-priority:#9c6256;
 }
 
 html, body {
@@ -343,6 +346,16 @@ label p{
 }
 .bg-priority5{
     background-color: var(--priority-default);
+}
+
+/*Reglas de backGroud para los tasks Completados*/
+
+.bg-priority1.completedTask,
+.bg-priority2.completedTask,
+.bg-priority3.completedTask,
+.bg-priority4.completedTask,
+.bg-priority5.completedTask{
+    background-color: var(--completed-priority);
 }
 
 /*Update Modal*/

@@ -21,7 +21,8 @@ function createElement(todoObj,id){
 function createTodoDisplay(todoObj,id){
     let todoDisplay = document.createElement("button");
     let classColor = getPriorityColor(todoObj.priority);
-    todoDisplay.classList.add("todo",classColor,"btn");
+    let statusColor = addCompletedColor(todoObj.status)
+    todoDisplay.classList.add("todo",classColor,"btn",statusColor);
     todoDisplay.setAttribute("data-id",id);
 
     //Atributos de boostrap, para hacer uso del update modal
@@ -111,7 +112,8 @@ function getPriorityColor(priority){
 function createNoteDisplay(noteObj,id){
     let noteDisplay = document.createElement("button");
     let classColor = getPriorityColor(noteObj.priority);
-    noteDisplay.classList.add("note",classColor,"btn");
+    let statusColor = addCompletedColor(noteObj.status)
+    noteDisplay.classList.add("note",classColor,statusColor,"btn");
     noteDisplay.setAttribute("data-id",id);
 
     //Atributos de boostrap, para hacer uso del update modal
@@ -130,7 +132,8 @@ function createNoteDisplay(noteObj,id){
 function createCheckListDisplay(checkListObj,id){
     let checklistDisplay = document.createElement("button");
     let classColor = getPriorityColor(checkListObj.priority);
-    checklistDisplay.classList.add("checkList",classColor,"btn");
+    let statusColor = addCompletedColor(checkListObj.status)
+    checklistDisplay.classList.add("checkList",classColor,"btn",statusColor);
     checklistDisplay.setAttribute("data-id",id);
 
     //Atributos de boostrap, para hacer uso del update modal
@@ -172,6 +175,13 @@ function createCheck(title,status,index){
 
     check.replaceChildren(miniCheckBtn,checkTitle);
     return check;
+}
+
+function addCompletedColor(status){
+    if(status){
+        return "completedTask"
+    }
+    else return "uncompletedTask"
 }
 
 export default createElement;
