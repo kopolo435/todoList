@@ -274,8 +274,11 @@ $('#updateModal').on('shown.bs.modal', function () {
 
 
 
-//Siempre agrega el project Default, en el cual se muestran todos los task siempre
+//Siempre agrega el project Default al inicio, en el cual se muestran todos los task siempre
 if(projectsCategories.indexOf("Default")<0){
+    projectsCategories.unshift("Default");
+}else{
+    projectsCategories.splice(projectsCategories.indexOf("Default"),1);
     projectsCategories.unshift("Default");
 }
 
