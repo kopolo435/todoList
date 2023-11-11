@@ -1,3 +1,6 @@
+/*Modulo creado para manejar y modificar el array que contiene todos los task
+en index.js  Todas las funciones que modifican el array siempre devuelven un array */
+
 function getCompletedTodoList(todoArray){
     let completedArray = todoArray.filter(todoObject => todoObject.status);
     return completedArray;
