@@ -1,6 +1,13 @@
 import createTodo from "./todoObject.js";
 import * as checkList from "./checkListObject.js";
 import createNote from "./noteObject.js";
+
+/*Modulo que se encarga de realizar la traida de datos de localstorage, así como el 
+almacenaje de informacion en el */
+
+
+/*Funcion que se exporta, retorna un array de las tasks(note,todo,checkList) almacenadas
+en localstorage. Si no hay ninguna almacenada entonces retorna un array vacio */
 function getStoredTasks(){
     if (storageAvailable("localStorage")) {
         if (!localStorage.getItem("categories")) {
@@ -15,12 +22,15 @@ function getStoredTasks(){
       
 }
 
-/*Agrega categoria inicial cuando se usa por primera vez*/
+/*Agrega categoria inicial y hace set al taskList cuando se usa por primera vez
+el localstorage*/
 function populateStorage(){
     localStorage.setItem("taskList",JSON.stringify([]));
     localStorage.setItem("categories",JSON.stringify(["Default"]));
 }
 
+/*Consigue el array de string que almacena las diferentes categorias guardadas
+si esta disponible localStorage, devuelve un array vacio para que no crashee la aplicacion */
 function getStoredCategories(){
     if (storageAvailable("localStorage")) {
         if (!localStorage.getItem("categories")) {
@@ -107,6 +117,7 @@ function createObject(object){
     }
 }
 
+//Crea los checks, para poder añadirle sus metodos
 function createChecks(checkObjs){
     let checkArray = []
     checkObjs.forEach(check =>{
