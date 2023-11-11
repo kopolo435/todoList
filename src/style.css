@@ -255,6 +255,7 @@ footer a{
 .todoDescription{
     grid-row: 2/3;
     grid-column: 2/5;
+    text-align: start;
 }
 
 @media (min-width: 576px) {
